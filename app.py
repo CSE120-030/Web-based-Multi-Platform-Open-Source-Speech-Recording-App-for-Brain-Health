@@ -1,12 +1,49 @@
-from flask import Flask
-
+from flask import Flask, render_template, url_for, redirect, abort, request
+from flask_login import current_user, login_user, login_required, LoginManager, logout_user
+from helper_functions import *
 app = Flask(__name__)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'load'
+app.secret_key = 'keep it secret, keep it safe' # Add this to avoid an error
+
+@login_manager.user_loader
+def load_user(user_id):
+	return get_user_by_id(user_id)
 
 @app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+def load():
+    if current_user.is_authenticated:
+        if current_user.is_patient():
+            return redirect(url_for("patient_portal",patient_name=current_user.get_name()))
+        elif current_user.is_expert():
+            return redirect(url_for("expert_portal",expert_name=current_user.get_name()))
+    return render_template("signUp.html")
 
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    # User already authenticated - serve appropriate portal page
+    if current_user.is_authenticated:
+        if current_user.is_patient():
+            return redirect(url_for('patient_portal', patient_name=current_user.get_name()))
+        elif current_user.is_expert():
+            return redirect(url_for('expert_portal', expert_name=current_user.get_name()))
+
+     # Get user - if function doesn't return actual user, abort
+    user = get_user_by_name(username=request.json['username'])
+    if isinstance(user, int):
+        abort(404)
+    if not user.check_password(request.json['password']):
+        abort(409)
+
+    # If password is correct, serve appropriate portal page
+    login_user(user)
+    if user.is_patient():
+        return redirect(url_for('patient_portal', patient_name=user.get_name()))
+    elif user.is_expert():
+        return redirect(url_for('expert_portal', expert_name=user.get_name()))
+    return redirect(url_for('load'))
 
 if __name__ == '__main__':
     app.run()
