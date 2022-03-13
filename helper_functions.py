@@ -22,13 +22,17 @@ def create_type_of_media(name,extension):
 
 
 
-def create_patient(username, password, firstName, lastName, languageId,email, expertId, dob, sex):
+def create_patient(username, password, firstName, lastName, languageId,e, expertId, dob, sex):
     username_exists = db.session.query(User).filter(User.username==username).first() is not None
     if username_exists:
         print("Sorry, username is taken")
     else:
         user_entry = User(username=username,password=password)
-        patient_entry = Patient(firstName = firstName, lastName=lastName, language=languageId,email=email,expertId=expertId,dob=dob,sex=sex,user=user_entry)
+        # get language
+        language = db.session.query(Language).filter(Language.languageId == languageId).first()
+        # get expert
+        expert = db.session.query(Expert).filter(Expert.expertId == expertId).first()
+        patient_entry = Patient(firstName = firstName, lastName=lastName, language=language, e=e, expertId=expert.expertId, dob=dob, sex=sex, user=user_entry)
         db.session.add(patient_entry)
         db.session.commit()
         return patient_entry
