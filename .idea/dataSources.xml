@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="speechDB.sqlite" uuid="d6a917ed-b35c-4a81-bbb0-5e2cae5e9357">
+    <data-source source="LOCAL" name="speechDB.sqlite" uuid="7bd1dde2-bba9-4948-a20f-bf8ec26f0481">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

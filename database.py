@@ -110,7 +110,7 @@ class Patient(db.Model):
     patientId = db.Column(db.Integer, primary_key=True)
     firstName = db.Column(db.String(100), nullable=False)
     lastName = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(150), nullable=False)
+    e = db.Column(db.String(150), nullable=False)  # e = email
     dob = db.Column(db.Date, nullable=False)
     sex =db.Column(db.String(10),nullable=False)
     # relationship to language. One to Many
