@@ -155,5 +155,38 @@ def create_media(media_note,file_path,asg,prompt,type_media):
     print(media_entry)
     return media_entry
 
+def get_expert(username):
+    user_name = db.session.query(User).filter(User.username==username).first()
+    if user_name is not None:
+        #user exists, therefore we can get id
+        user_id = user_name.userId
+        # get email
+        e = db.session.query(Expert).filter(Expert.userId==user_id).first()
+        print("email: ",e.e)
+        print("User id is:", user_id)
+
+
+    else:
+        print("Username does not exist")
+        return -1
+
+    return user_id
+
+# get all media files for a given patient
+def get_media_file(username):
+    user_name = db.session.query(User).filter(User.username==username).first()
+    patient = db.session.query(Patient).filter(Patient.userId==user_name.userId).first() # get patient
+    #print(patient.patientId)
+    media_file = db.session.query(Media,Assignment).join(Assignment,Assignment.assignmentId==Media.assignmentId).filter(Assignment.patientId==patient.patientId).all()
+    print(media_file)
+    for m, asg in media_file:
+        print("Media Id:{} MediaNote: {} filePath: {} Media.assignmentId:{} promptId: {} typeOfMediaId: {} Assignments.assignmetId: {} dateOfAssignment:{} stateOfPrompt:{} expertNote:{} groupOfPromptsId: {} expertId: {} patientId: {}"
+        .format(m.mediaId,m.mediaNote,m.filePath,m.assignmentId,m.promptId,m.typeOfMediaId,asg.assignmentId,asg.dateOfAssignment,asg.stateOfPrompt,asg.expertNote,asg.groupOfPromptsId,asg.expertId,asg.patientId) )
+
+
+
+    return media_file
+
+
 
 
