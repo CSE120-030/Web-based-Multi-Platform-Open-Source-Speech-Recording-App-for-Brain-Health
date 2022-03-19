@@ -1,11 +1,53 @@
+import datetime
+
 from helper_functions import *
 from datetime import date
 language=1
 expert=1
 d = date(2000,9,15)
-print(d)
+#print(d)
 #create_expert("expert1","1234","fName","lName","00000","123@asd.com")
 #create_language(name="English",prefix="eng")
-create_patient(username="patient2",password="1234",firstName="fName",lastName="lName",languageId=language,e="1234@asd.com",expertId=expert,dob=d,sex="M")
+#create_patient(username="patient2",password="1234",firstName="fName",lastName="lName",languageId=language,e="1234@asd.com",expertId=expert,dob=d,sex="M")
 
 
+# create image
+#create_image("image1","//images//some_path")
+
+#create type_prompt() # the description can be changed later
+#create_type_of_prompt("Spontaneous","Spontaneous prompt")
+#create_type_of_prompt("Semi-spontaneous","Semi-spontaneous prompt")
+#create_type_of_prompt("Non-spontaneous","Non spontaneous")
+
+# creaate type of media
+#create_type_of_media("Audio",".wav")
+#create_type_of_media("Video",".mp4")
+
+#create group of Prompts
+#create_group_of_prompt("Group1")
+
+#create list of groups
+#create_list_group()
+
+#  create prompt
+#create_prompt(description="This is the description",languageId=1,expertId=1,imageId=1,topId=1)
+
+#assign group to prompt
+#add_prompt_to_group("Group1",1)
+#get_list_group_id()
+
+#create assignment
+#date_asg = datetime.datetime.now()
+#state_of_prompt =0 #0 for unfinished, 1 for finished
+#expert_asg=1
+#patient_asg=1
+#group_of_prompt=1
+
+#print(date_asg)
+#create_asg(group_id=group_of_prompt,date_of_asg=date_asg,sop=state_of_prompt,expertN="Test",expert_id=expert_asg,patient_id=patient_asg)
+
+#create media
+#asg_id=1
+#prompt_id=1
+#type_media_id=1
+#create_media(media_note="Audio good",file_path="../amazon/bucket",asg=asg_id,prompt=prompt_id,type_media=type_media_id)

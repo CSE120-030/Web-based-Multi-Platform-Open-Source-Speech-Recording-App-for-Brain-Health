@@ -1,6 +1,8 @@
 from database import *
 from flask_login import UserMixin
 
+
+
 # Create user associated with patient
 def create_language(name,prefix):
     language_entry = Language(name=name,prefix=prefix)
@@ -9,10 +11,27 @@ def create_language(name,prefix):
     return language_entry
 
 def create_prompt(description, languageId, expertId, imageId,topId):
-    prompt_entry = Prompt(descriptionPrompt=description,language=languageId,expert=expertId,image=imageId,typeOfPrompt=topId)
+    # create object of group_of_prompt
+
+    # get the type pf prompt id
+    type_of_prompt_id = db.session.query(TypeOfPrompt).filter(TypeOfPrompt.typeOfPromptId==topId).first()
+    # get the language
+    language_id = db.session.query(Language).filter(Language.languageId==languageId).first()
+    #get the expert
+    expert_id = db.session.query(Expert).filter(Expert.expertId==expertId).first()
+    # get the image
+    image_id = db.session.query(Image).filter(Image.imageId==imageId).first()
+    prompt_entry = Prompt(descriptionPrompt=description,languageId=language_id.languageId,expertId=expert_id.expertId,imageId=image_id.imageId,typeOfPromptId=type_of_prompt_id.typeOfPromptId)
     db.session.add(prompt_entry)
     db.session.commit()
     return prompt_entry
+
+def create_list_group(promptId,groupId):
+    list_group_entry = ListGroup(groupOfPrompt =groupId,prompt=promptId)
+    db.session.add(list_group_entry)
+    db.session.commit()
+    return  list_group_entry
+
 
 def create_type_of_media(name,extension):
     tom_entry = TypeOfMedia(nameMedia=name,extension=extension)
@@ -87,5 +106,54 @@ def get_user_by_id(user_id):
         return user
     else:
         return None
+
+
+def add_prompt_to_group(groupName,prompt):
+    # get the group
+    group = db.session.query(GroupOfPrompt).filter(GroupOfPrompt.name==groupName).first()
+    # get the prompt
+    prompt = db.session.query(Prompt).filter(Prompt.promptId==prompt).first()
+    last_id = get_list_group_id()
+    list_group = ListGroup()
+    list_group.listGroupId= last_id+1
+    list_group.groupOfPromptId=group.groupOfPromptId
+    list_group.promptId=prompt.promptId
+
+    prompt.groupOfPrompt.append(list_group)
+    db.session.commit()
+
+    return list_group
+
+def get_list_group_id():
+    id = db.session.query(ListGroup).order_by(ListGroup.listGroupId.desc()).first()
+    #print(id.listGroupId)
+    return id.listGroupId
+
+def create_asg(group_id,date_of_asg,sop,expertN,expert_id,patient_id):
+    # get expert
+    expert = db.session.query(Expert).filter(Expert.expertId==expert_id).first()
+    # get patient
+    patient = db.session.query(Patient).filter(Patient.patientId==patient_id).first()
+    #get group of Prompts
+    group = db.session.query(GroupOfPrompt).filter(GroupOfPrompt.groupOfPromptId==group_id).first()
+    asg_entry = Assignment(groupOfPromptsId=group.groupOfPromptId,dateOfAssignment=date_of_asg,stateOfPrompt=sop,expertNote=expertN,expertId=expert.expertId,patientId=patient.patientId)
+    db.session.add(asg_entry)
+    db.session.commit()
+    print(asg_entry)
+    return asg_entry
+
+def create_media(media_note,file_path,asg,prompt,type_media):
+    # get assignment
+    asg_id = db.session.query(Assignment).filter(Assignment.assignmentId==asg).first()
+    # get prompt
+    prompt_id = db.session.query(Prompt).filter(Prompt.promptId==prompt).first()
+    # get type of media
+    type_media_id = db.session.query(TypeOfMedia).filter(TypeOfMedia.typeOfMediaId==type_media).first()
+    media_entry = Media(mediaNote=media_note,filePath=file_path,assignmentId=asg_id.assignmentId,promptId =prompt_id.promptId, typeOfMediaId=type_media_id.typeOfMediaId)
+    db.session.add(media_entry)
+    db.session.commit()
+    print(media_entry)
+    return media_entry
+
 
 
