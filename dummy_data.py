@@ -51,3 +51,11 @@ d = date(2000,9,15)
 #prompt_id=1
 #type_media_id=1
 #create_media(media_note="Audio good",file_path="../amazon/bucket",asg=asg_id,prompt=prompt_id,type_media=type_media_id)
+
+# get expert id
+#user_name="expert1"
+#get_expert(username=user_name)
+
+#get all media files for a given patient
+patient="patient1" #username
+get_media_file(username=patient)

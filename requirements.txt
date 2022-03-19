@@ -1,2 +1,3 @@
 SQLAlchemy
 flask-login
+boto3 
