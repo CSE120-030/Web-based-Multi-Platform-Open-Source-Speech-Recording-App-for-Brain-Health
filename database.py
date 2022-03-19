@@ -191,7 +191,7 @@ class Media(db.Model):
     typeOfMedia = db.relationship("TypeOfMedia",
                              backref=db.backref("Medias", lazy=True, cascade="all, delete, delete-orphan"))
 
-db.create_all() # create_db
+#db.create_all() # create_db
 
 
 
