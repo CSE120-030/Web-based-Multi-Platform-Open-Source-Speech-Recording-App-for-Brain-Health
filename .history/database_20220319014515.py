@@ -1,8 +1,8 @@
 from flask import json
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-#from flask import Flask, request, jsonify
-#from flask_cors import CORS #alow another external URL to communicate with the Flask app.
+from flask import Flask, request, jsonify
+from flask_cors import CORS #alow another external URL to communicate with the Flask app.
 
 from myapp import app
 
