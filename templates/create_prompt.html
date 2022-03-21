@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<h1>Prompt creation</h1>
+<h3>Prompt Description:
+</h3>
+<textarea rows="10" cols="100" placeholder="Enter Prompt Description">
+
+</textarea>
+<h3
+    >Type of Prompt: </h3>
+<select name="Type_of_Prompt">
+{% for item in top %}
+<option value="{{item.type_of_prompt}}">{{item.prompt_name}}</option>
+{% endfor %}
+</select>
+<h3 for="image">Choose a image for prompt:</h3>
+
+<input type="file"
+       id="imageSelected" name="image"
+       accept="image/png, image/jpeg">
+
+<input type="button" value="Submit" onclick="checkForm()">
+
+
+
+
+<script type="text/javascript" src="{{url_for('static', filename='createPromptJS.js')}}"> </script>
+</body>
+</html>

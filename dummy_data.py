@@ -1,6 +1,7 @@
 import datetime
 
 from helper_functions import *
+from prompt_helper_functions import *
 from datetime import date
 language=1
 expert=1
@@ -29,8 +30,8 @@ d = date(2000,9,15)
 #create list of groups
 #create_list_group()
 
-#  create prompt
-#create_prompt(description="This is the description",languageId=1,expertId=1,imageId=1,topId=1)
+  #create prompt
+#create_prompt(description="Prompt2",languageId=1,imageId=1,expertId=1,topId=1)
 
 #assign group to prompt
 #add_prompt_to_group("Group1",1)
@@ -57,5 +58,7 @@ d = date(2000,9,15)
 #get_expert(username=user_name)
 
 #get all media files for a given patient
-patient="patient1" #username
-get_media_file(username=patient)
+#patient="patient1" #username
+#get_media_file(username=patient)
+
+get_all_prompts()

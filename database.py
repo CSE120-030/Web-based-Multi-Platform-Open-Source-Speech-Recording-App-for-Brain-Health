@@ -33,7 +33,7 @@ class Prompt(db.Model):
 
     # relationship to image One to many
     imageId = db.Column(db.Integer, db.ForeignKey("Images.imageId", onupdate="CASCADE", ondelete="CASCADE"),
-                           nullable=False)
+                           nullable=True)
     image = db.relationship("Image",
                                backref=db.backref("Prompts", lazy=True, cascade="all, delete, delete-orphan"))
 
