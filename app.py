@@ -2,7 +2,8 @@ from flask import Flask, render_template, url_for, redirect, abort, request
 from flask_login import current_user, login_user, login_required, LoginManager, logout_user
 from helper_functions import *
 from media_bucket import *
-app = Flask(__name__)
+from prompt_helper_functions import *
+#app = Flask(__name__)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -55,6 +56,16 @@ def media():
 
         print(request.files['audio_data'])
         return render_template("media.html",media_sent=get_media(request.files['audio_data']))
+
+@app.route('/createPrompt', methods=['GET','POST'])
+def createPrompt():
+    if request.method=="GET":
+        return render_template("create_prompt.html",top=get_all_prompts())
+
+    if request.method=="POST":
+        return render_template("create_prompt.html")
+
+
 
 
 
