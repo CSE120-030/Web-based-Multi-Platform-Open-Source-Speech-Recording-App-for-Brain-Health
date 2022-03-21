@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, redirect, abort, request
 from flask_login import current_user, login_user, login_required, LoginManager, logout_user
 from helper_functions import *
+from media_bucket import *
 app = Flask(__name__)
 
 login_manager = LoginManager()
@@ -44,6 +45,18 @@ def login():
     elif user.is_expert():
         return redirect(url_for('expert_portal', expert_name=user.get_name()))
     return redirect(url_for('load'))
+
+@app.route('/media', methods=['POST', 'GET'])
+def media():
+    if request.method=="GET":
+        return render_template("media.html")
+    if request.method=="POST":
+        print("in post method")
+
+        print(request.files['audio_data'])
+        return render_template("media.html",media_sent=get_media(request.files['audio_data']))
+
+
 
 if __name__ == '__main__':
     app.run()
