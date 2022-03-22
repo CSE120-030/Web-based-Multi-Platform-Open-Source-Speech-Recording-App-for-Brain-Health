@@ -1,3 +1,5 @@
+import json
+
 from database import *
 from flask_login import UserMixin
 
@@ -92,6 +94,7 @@ def create_expert(username, password, firstName, lastName, licenseNumber, e):
 def get_user_by_name(username):
     user = db.session.query(User).filter(User.username == username).first()
     print(user)
+    dict = {'username':user.username,'password':user.password}
     if user is not None:
         return user
     else:
@@ -101,7 +104,7 @@ def get_user_by_name(username):
 
 # get user by userId (used for login user_loader)
 def get_user_by_id(user_id):
-    user = db.session.query(User).filter(User.id == user_id).first()
+    user = db.session.query(User).filter(User.userId== user_id).first()
     if user is not None:
         return user
     else:

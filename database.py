@@ -65,23 +65,30 @@ class User(UserMixin,db.Model):
     password = db.Column(db.String(50), nullable= False)
 
     def is_patient(self):
-        return db.session.query(Patient).filter(Patient.patientId == self.id).first() is not None
+        return db.session.query(Patient).filter(Patient.userId == self.userId).first() is not None
 
     def is_expert(self):
-        return db.session.query(Expert).filter(Expert.expertId == self.id).first() is not None
+        return db.session.query(Expert).filter(Expert.userId == self.userId).first() is not None
 
     def get_name(self):
-        patient = db.session.query(Patient).filter(Patient.patientId == self.id).first()
+        patient = db.session.query(Patient).filter(Patient.userId == self.userId).first()
         name = None
         if patient is not None:
             name = patient.firstName + patient.lastName
-        expert = db.session.query(Expert).filter(Expert.expertId == self.id).first()
+        expert = db.session.query(Expert).filter(Expert.userId == self.userId).first()
         if expert is not None:
             name = expert.firstName+expert.lastName
 
         return name
+
+    def get_id(self):
+        return self.userId
+
     def check_password(self,password):
         return self.password ==password
+
+
+
 
     def __repr__(self):
         return "Username: %s" % self.username
