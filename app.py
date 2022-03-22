@@ -18,9 +18,9 @@ def load_user(user_id):
 def load():
     if current_user.is_authenticated:
         if current_user.is_patient():
-            return redirect(url_for("patient_portal",patient_name=current_user.get_name()))
+            return redirect(url_for("patientPortal",patient_name=current_user.get_name()))
         elif current_user.is_expert():
-            return redirect(url_for("expert_portal",expert_name=current_user.get_name()))
+            return redirect(url_for("expertPortal",expert_name=current_user.get_name()))
     return render_template("signUp.html")
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -28,12 +28,13 @@ def login():
     # User already authenticated - serve appropriate portal page
     if current_user.is_authenticated:
         if current_user.is_patient():
-            return redirect(url_for('patient_portal', patient_name=current_user.get_name()))
+            return redirect(url_for('patientPortal', patient_name=current_user.get_name()))
         elif current_user.is_expert():
-            return redirect(url_for('expert_portal', expert_name=current_user.get_name()))
+            return redirect(url_for('expertPortal', expert_name=current_user.get_name()))
 
      # Get user - if function doesn't return actual user, abort
     user = get_user_by_name(username=request.json['username'])
+    print(user)
     if isinstance(user, int):
         abort(404)
     if not user.check_password(request.json['password']):
@@ -41,11 +42,26 @@ def login():
 
     # If password is correct, serve appropriate portal page
     login_user(user)
+    # If password is correct, serve appropriate portal page
     if user.is_patient():
-        return redirect(url_for('patient_portal', patient_name=user.get_name()))
+        return redirect(url_for('patientPortal', patient_name=user.get_name()))
     elif user.is_expert():
-        return redirect(url_for('expert_portal', expert_name=user.get_name()))
+        return redirect(url_for('expertPortal', expert_name=user.get_name()))
     return redirect(url_for('load'))
+
+@app.route('/expertPortal/<expert_name>', methods=['POST','GET'])
+@login_required
+def expertPortal(expert_name):
+    if request.method=="GET":
+        return render_template("expertPortal.html")
+
+
+@app.route('/patientPortal/<patient_name>', methods=['POST', 'GET'])
+@login_required
+def patientPortal(patient_name):
+    if request.method == "GET":
+        return render_template("patientPortal.html")
+
 
 @app.route('/media', methods=['POST', 'GET'])
 def media():

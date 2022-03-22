@@ -5,12 +5,19 @@
     <title>Title</title>
 </head>
 <body>
+<div id ="form_block">
 <h3>username:</h3>
-<input type="text">
+<input type="text" id="username">
 <h3>password:</h3>
-<input type="text">
+<input type="text" id="password">
+
+<input type="button" value="Log in" onclick="logIn()">
 <h4>
     Not account? <a href="">Sign up</a>
 </h4>
+</div>
+
+<script type="text/javascript" src="{{url_for('static', filename='loginJS.js')}}"> </script>
+
 </body>
 </html>
