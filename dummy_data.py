@@ -14,6 +14,15 @@ d = date(2000,9,15)
 
 # create image
 #create_image("image1","//images//some_path")
+#create_image("number_one",'./Images/one.png')
+#create_image("number_two",'./Images/two.png')
+#create_image("number_three",'./Images/three.png')
+#create_image("number_four",'./Images/four.png')
+#create_image("number_five",'./Images/five.png')
+#create_image("number_six",'./Images/six.png')
+#create_image("number_seven",'./Images/seven.png')
+#create_image("blank",'./Images/blank.jpg')
+#create_image("test",'./Images/test.jpg')
 
 #create type_prompt() # the description can be changed later
 #create_type_of_prompt("Spontaneous","Spontaneous prompt")
@@ -61,4 +70,7 @@ d = date(2000,9,15)
 #patient="patient1" #username
 #get_media_file(username=patient)
 
-get_all_prompts()
+#get_all_prompts()
+
+
+get_image_name("C:\ fakepath\ two.png")

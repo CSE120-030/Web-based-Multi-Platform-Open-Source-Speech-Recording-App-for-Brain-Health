@@ -73,17 +73,16 @@ def media():
         print(request.files['audio_data'])
         return render_template("media.html",media_sent=get_media(request.files['audio_data']))
 
-@app.route('/createPrompt', methods=['GET','POST'])
+@app.route('/expertPortal/createPrompt/', methods=['GET','POST'])
+@login_required
 def createPrompt():
     if request.method=="GET":
-        return render_template("create_prompt.html",top=get_all_prompts())
+        return render_template("create_prompt.html",top=get_all_prompts(),expert=getExpert(),languages=get_languages())
 
     if request.method=="POST":
-        return render_template("create_prompt.html")
-
-
-
-
+        print("in post method")
+        print(request.json)
+        return render_template("create_prompt.html", promptCreation=prompt_creation(request.json))
 
 if __name__ == '__main__':
     app.run()

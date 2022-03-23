@@ -12,21 +12,7 @@ def create_language(name,prefix):
     db.session.commit()
     return language_entry
 
-def create_prompt(description, languageId, expertId, imageId,topId):
-    # create object of group_of_prompt
 
-    # get the type pf prompt id
-    type_of_prompt_id = db.session.query(TypeOfPrompt).filter(TypeOfPrompt.typeOfPromptId==topId).first()
-    # get the language
-    language_id = db.session.query(Language).filter(Language.languageId==languageId).first()
-    #get the expert
-    expert_id = db.session.query(Expert).filter(Expert.expertId==expertId).first()
-    # get the image
-    image_id = db.session.query(Image).filter(Image.imageId==imageId).first()
-    prompt_entry = Prompt(descriptionPrompt=description,languageId=language_id.languageId,expertId=expert_id.expertId,imageId=image_id.imageId,typeOfPromptId=type_of_prompt_id.typeOfPromptId)
-    db.session.add(prompt_entry)
-    db.session.commit()
-    return prompt_entry
 
 def create_list_group(promptId,groupId):
     list_group_entry = ListGroup(groupOfPrompt =groupId,prompt=promptId)
