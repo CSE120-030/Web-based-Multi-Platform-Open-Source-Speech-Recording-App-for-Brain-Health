@@ -15,7 +15,9 @@ def create_language(name,prefix):
 
 
 def create_list_group(promptId,groupId):
-    list_group_entry = ListGroup(groupOfPrompt =groupId,prompt=promptId)
+    prompt = db.session.query(Prompt).filter(Prompt.promptId==promptId).first()
+    group = db.session.query(GroupOfPrompt).filter(GroupOfPrompt.groupOfPromptId==groupId).first()
+    list_group_entry = ListGroup(groupOfPrompt =group.groupOfPromptId,prompt=prompt.promptId)
     db.session.add(list_group_entry)
     db.session.commit()
     return  list_group_entry
@@ -125,6 +127,7 @@ def create_asg(group_id,date_of_asg,sop,expertN,expert_id,patient_id):
     patient = db.session.query(Patient).filter(Patient.patientId==patient_id).first()
     #get group of Prompts
     group = db.session.query(GroupOfPrompt).filter(GroupOfPrompt.groupOfPromptId==group_id).first()
+
     asg_entry = Assignment(groupOfPromptsId=group.groupOfPromptId,dateOfAssignment=date_of_asg,stateOfPrompt=sop,expertNote=expertN,expertId=expert.expertId,patientId=patient.patientId)
     db.session.add(asg_entry)
     db.session.commit()
