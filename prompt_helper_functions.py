@@ -54,9 +54,13 @@ def create_prompt(description, languageId, expertId, imageId, topId):
     return prompt_entry
 
 def get_image_id(imageName):
-    image_id = db.session.query(Image).filter(Image.name==imageName).first()
-    #print(imageName)
-    #print(image_id.imageId)
+    if type(imageName)== int:
+        image_id = db.session.query(Image).filter(Image.imageId==imageName).first()
+
+
+    if type(imageName)==str:
+        image_id = db.session.query(Image).filter(Image.name==imageName).first()
+
     return image_id.imageId
 
 def get_language_id(languageId):

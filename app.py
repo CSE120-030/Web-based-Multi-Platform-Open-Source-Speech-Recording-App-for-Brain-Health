@@ -3,6 +3,7 @@ from flask_login import current_user, login_user, login_required, LoginManager, 
 from helper_functions import *
 from media_bucket import *
 from prompt_helper_functions import *
+from assignment_helper import *
 #app = Flask(__name__)
 
 login_manager = LoginManager()
@@ -49,18 +50,18 @@ def login():
         return redirect(url_for('expertPortal', expert_name=user.get_name()))
     return redirect(url_for('load'))
 
-@app.route('/expertPortal/<expert_name>', methods=['POST','GET'])
+@app.route('/expertPortal/', methods=['POST','GET'])
 @login_required
-def expertPortal(expert_name):
+def expertPortal():
     if request.method=="GET":
         return render_template("expertPortal.html")
 
 
-@app.route('/patientPortal/<patient_name>', methods=['POST', 'GET'])
+@app.route('/patientPortal', methods=['POST', 'GET'])
 @login_required
-def patientPortal(patient_name):
+def patientPortal():
     if request.method == "GET":
-        return render_template("patientPortal.html")
+        return render_template("patientPortal.html", your_assingments=get_assignments(), add_assginment=add_assignemnt())
 
 
 @app.route('/media', methods=['POST', 'GET'])

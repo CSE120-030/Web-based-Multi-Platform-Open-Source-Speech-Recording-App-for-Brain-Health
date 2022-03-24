@@ -18,11 +18,13 @@
 </select>
 
 <h3>Language: </h3>
+
 <select name="Language_selection" id="type_of_language">
 {% for i in languages %}
 <option value="{{i.language_id}}">{{i.name}}</option>
 {% endfor %}
 </select>
+
 
 <h3 for="image">Choose a image for prompt:</h3>
 

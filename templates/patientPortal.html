@@ -5,7 +5,30 @@
     <title>Patient Portal</title>
 </head>
 <body>
-<h1
-    >Patient portal</h1>
+<h1>Patient portal</h1>
+ <div id="yourCourses" class="tabcontent">
+            <table>
+                <tr>
+                  <th>Assignment</th>
+                  <th>Deadline</th>
+                  <th>Patient</th>
+                  <th>Status</th>
+                    <th>Job Status</th>
+                     <th><button class="start_asg">Start</button></th>
+
+                </tr>
+                {% for i in your_assingments %}
+					<tr>
+						<th id="cell"><a href="{{url_for('grades',course_name = course[0])}}">{{ course[0] }}</a></th>
+		                <th id="cell">{{ course[2] }}</th>
+		                <th id="cell">{{ course[1] }}</th>
+		                <th id="cell">{{ course[3] }}/{{ course[4] }}</th>
+					</tr>
+				{% endfor %}
+
+              </table>
+        </div>
+    <script type="text/javascript" src="{{url_for('static', filename='teacher_portal.js')}}"> </script>
+
 </body>
 </html>
