@@ -57,11 +57,21 @@ def expertPortal():
         return render_template("expertPortal.html")
 
 
-@app.route('/patientPortal', methods=['POST', 'GET'])
+@app.route('/patientPortal/', methods=['POST', 'GET'])
 @login_required
 def patientPortal():
     if request.method == "GET":
-        return render_template("patientPortal.html", your_assingments=get_assignments(), add_assginment=add_assignemnt())
+        return render_template("patientPortal.html",your_assignments =get_assignments())
+
+    if request.method == "POST":
+        return render_template("patientPortal.html",get_asg_name=asg_to_do(request.json))
+
+@app.route('/patientPortal/do_prompt', methods=['POST', 'GET'])
+@login_required
+def do_prompts():
+    if request.method=="GET":
+        return render_template("prompt.html")
+
 
 
 @app.route('/media', methods=['POST', 'GET'])
