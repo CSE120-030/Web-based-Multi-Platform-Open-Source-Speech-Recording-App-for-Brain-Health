@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>Patient Portal</title>
 </head>
+<script>
+
+      var control=-1;
+    sessionStorage.setItem('control',JSON.stringify(control));
+    console.log(control);
+
+</script>
 <body>
 <h1>Patient portal</h1>
  <div id="yourCourses" class="tabcontent">
@@ -22,7 +29,7 @@
                         <th class="group_name">{{ i.group_name}}</th>
 		                <th >{{ i.date_of_assignment}}</th>
                         <th >{{ i.state_of_prompt }}</th>
-                        <th><button class="start_asg" onclick="startAsg(this)"><a href="{{url_for('do_prompts')}}">Start</a></button></th>
+                        <th><button class="start_asg" onclick="startAsg(this)"><a href="{{url_for('do_prompts',prompt_id=0)}}">Start</a></button></th>
 
 					</tr>
 				{% endfor %}

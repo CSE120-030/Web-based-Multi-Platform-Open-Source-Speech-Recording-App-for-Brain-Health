@@ -5,11 +5,40 @@
     <title>Expert Portal</title>
 </head>
 <body>
-<h1
-    >Expert Portal</h1>
-
+<h1>Expert Portal</h1>
 <aside><h3>Create Prompt</h3>
-    <a href="{{ url_for('createPrompt') }}">Create Prompt</a></aside>
+    <a href="{{ url_for('createPrompt') }}">Create Prompt</a><br><br>
+    <div id="yourCourses" class="tabcontent">
+            <table>
+                <tr>
+                  <th>Type of Prompt</th>
+                  <th>Language</th>
+                  <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Assignment Id</th>
+                    <th>Prompt Id</th>
+                    <th>Download</th>
+
+
+
+                </tr>
+
+                {% for i in table %}
+					<tr>
+                        <td class="group_name">{{ i.type_of_prompt}}</td>
+		                <td >{{ i.language}}</td>
+                        <td >{{ i.first_name }}</td>
+                    <td >{{ i.last_name }}</td>
+                    <td >{{ i.asg_id }}</td>
+                    <td >{{ i.prompt_id }}</td>
+                        <td><button><a href="{{url_for('get_prompt')}}">Download</a></button></td>
+                </tr>
+				{% endfor %}
+
+              </table>
+
+        </div>
+
 
 
 </body>

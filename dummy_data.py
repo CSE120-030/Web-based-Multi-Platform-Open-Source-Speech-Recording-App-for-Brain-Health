@@ -2,6 +2,8 @@ import datetime
 
 from helper_functions import *
 from prompt_helper_functions import *
+from assignment_helper import *
+from media_bucket import *
 from datetime import date
 language=1
 expert=1
@@ -79,5 +81,9 @@ d = date(2000,9,15)
 #create_list_group(promptId=7,groupId=2) # semi spontaneous prompt to general list of prompts
 #create_list_group(promptId=8,groupId=2) # Non-spontaneous prompt to general list of prompts
 
-add_prompt_to_group(groupName="General",prompt=7)
-add_prompt_to_group(groupName="General",prompt=8)
+#add_prompt_to_group(groupName="General",prompt=7)
+#add_prompt_to_group(groupName="General",prompt=8)
+
+# testing asg helpers
+#list_of_prompts()
+#get_file_name()
