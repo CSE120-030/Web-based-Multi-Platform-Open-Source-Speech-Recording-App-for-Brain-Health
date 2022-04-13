@@ -1,0 +1,7 @@
+{% for i in prompts %}
+{% for ii in i.items() %}
+    <p>{{ ii }}</p>>
+    <
+
+    {% endfor %}
+{% endfor %}

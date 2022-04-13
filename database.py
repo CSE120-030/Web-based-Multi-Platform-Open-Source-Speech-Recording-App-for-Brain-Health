@@ -7,6 +7,7 @@ from flask_login import UserMixin
 from myapp import app
 
 db = SQLAlchemy(app)
+
 class ListGroup(db.Model):
     __tablename__ = 'ListGroups'
     listGroupId = db.Column(db.Integer, primary_key=True)

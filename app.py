@@ -1,9 +1,17 @@
-from flask import Flask, render_template, url_for, redirect, abort, request
+import copy
+from flask import Flask, render_template, url_for, redirect, abort, request, send_file
 from flask_login import current_user, login_user, login_required, LoginManager, logout_user
 from helper_functions import *
 from media_bucket import *
 from prompt_helper_functions import *
 from assignment_helper import *
+from config import promptCounter
+import os
+import requests
+from urllib.request import urlopen
+
+from copy import deepcopy
+from flask_paginate import Pagination, get_page_args
 #app = Flask(__name__)
 
 login_manager = LoginManager()
@@ -11,8 +19,17 @@ login_manager.init_app(app)
 login_manager.login_view = 'load'
 app.secret_key = 'keep it secret, keep it safe' # Add this to avoid an error
 
+prompt_list=[]
+list_length=0
+MEDIA_FOLDER = os.path.join('static','Images')
+app.config['UPLOAD_FOLDER'] = MEDIA_FOLDER
+image_name = ""
+prompt_counter=-1
+
+prompt_counter_aws=-1
 @login_manager.user_loader
 def load_user(user_id):
+
 	return get_user_by_id(user_id)
 
 @app.route('/')
@@ -54,7 +71,7 @@ def login():
 @login_required
 def expertPortal():
     if request.method=="GET":
-        return render_template("expertPortal.html")
+        return render_template("expertPortal.html",prompts = get_file_name_expert(), table= info_expert_portal())
 
 
 @app.route('/patientPortal/', methods=['POST', 'GET'])
@@ -64,13 +81,68 @@ def patientPortal():
         return render_template("patientPortal.html",your_assignments =get_assignments())
 
     if request.method == "POST":
-        return render_template("patientPortal.html",get_asg_name=asg_to_do(request.json))
+        print("in post function")
+        print(request.json)
+        list_returned = asg_to_do(request.json);
+        print("right after asg to do was called")
+        print(list_returned)
+        print("list_length:",list_length)
+        for item in list_returned:
+            new_dict = copy.deepcopy(item)
+            prompt_list.append(new_dict)
+        print("after for loop")
+        print("printing prompt list")
+        print(prompt_list)
+        #return render_template("patientPortal.html")#get_asg_name=asg_to_do(request.json))
+        return render_template("prompt.html")#redirect(url_for("do_prompts",prompt_id=0))
 
-@app.route('/patientPortal/do_prompt', methods=['POST', 'GET'])
+
+@app.route('/patientPortal/do_prompts/<prompt_id>', methods=['POST', 'GET'])
 @login_required
-def do_prompts():
+def do_prompts(prompt_id):
+    print("we got prompt id:",prompt_id)
     if request.method=="GET":
-        return render_template("prompt.html")
+        #print("get method")
+        #print(get_prompt_from_list(1))
+        global image_name
+        image = get_prompt_from_list(prompt_id)
+
+        for i in image:
+            print(type(i))
+            print("i: ",i)
+            imageId = i["imageId"]
+
+
+        image_path = load_prompt_photo(imageId) # get image name
+        image_name = load_prompt_photo(imageId)
+        full_filename = os.path.join(app.config['UPLOAD_FOLDER'], image_path)
+        print(image_path)
+        print(full_filename)
+        return render_template("prompt.html",specific_prompt=get_prompt_from_list(prompt_id),prompt_queue=get_queue_from_prompt_list(),image = image_path)#,promps=group_name)
+
+    if request.method=="POST":
+        return render_template("prompt.html", media_sent=get_media(request.files['audio_data']))
+
+
+@app.route("/load_promp",methods=["GET"])
+def load_prompts():
+    #asg_obj = assignment()
+    #control_asg = asg_obj.get_asg_counter()
+    #control_asg +=1
+    #asg_obj.set_asg_counter(control_asg)
+    #print("asg id: ", control_asg)
+    global prompt_counter
+    prompt_counter+=1
+    return redirect(url_for("do_prompts",prompt_id=prompt_counter))
+
+
+@app.route("/getimage", methods = ['POST','GET'])
+def get_image():
+    if request.method == "GET":
+        global image_name
+        print("in get image")
+        print(image_name)
+        return image_name
 
 
 
@@ -94,6 +166,30 @@ def createPrompt():
         print("in post method")
         print(request.json)
         return render_template("create_prompt.html", promptCreation=prompt_creation(request.json))
+
+@app.route('/expertPortal/download_prompt', methods=['GET','POST'])
+@login_required
+def get_prompt():
+    if request.method=='GET':
+        global prompt_counter_aws
+        prompt_counter_aws+=1
+        print(prompt_counter_aws)
+
+        name_file_dowload = get_file_name_expert()
+        print(name_file_dowload[int(prompt_counter_aws)])
+        file=aws_download(name_file_dowload[int(prompt_counter_aws)])
+        return redirect(file,code=302)
+
+
+
+
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add("Access-Control-Allow-Methods", "GET,DELETE,POST,PUT")
+  response.headers.add("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
+  #response.headers.add('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token')
+  return response
 
 if __name__ == '__main__':
     app.run()
