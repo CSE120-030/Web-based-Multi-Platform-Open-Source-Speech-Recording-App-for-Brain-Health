@@ -31,7 +31,7 @@
                     <td >{{ i.last_name }}</td>
                     <td >{{ i.asg_id }}</td>
                     <td >{{ i.prompt_id }}</td>
-                        <td><button><a href="{{url_for('get_prompt')}}">Download</a></button></td>
+                        <td><button class="download_prompt" onclick="download(this)"><a href="{{url_for('get_prompt',prompt_name=i.type_of_prompt)}}">Download</a></button></td>
                 </tr>
 				{% endfor %}
 
@@ -41,5 +41,6 @@
 
 
 
+</aside>
 </body>
 </html>

@@ -167,18 +167,47 @@ def createPrompt():
         print(request.json)
         return render_template("create_prompt.html", promptCreation=prompt_creation(request.json))
 
-@app.route('/expertPortal/download_prompt', methods=['GET','POST'])
+@app.route('/expertPortal/download_prompt/<prompt_name>', methods=['GET','POST'])
 @login_required
-def get_prompt():
+def get_prompt(prompt_name):
+    global prompt_counter_aws
     if request.method=='GET':
-        global prompt_counter_aws
-        prompt_counter_aws+=1
-        print(prompt_counter_aws)
+        print(prompt_name)
+        if prompt_name=="Spontaneous":
 
-        name_file_dowload = get_file_name_expert()
-        print(name_file_dowload[int(prompt_counter_aws)])
-        file=aws_download(name_file_dowload[int(prompt_counter_aws)])
-        return redirect(file,code=302)
+            prompt_counter_aws=0
+            print(prompt_counter_aws)
+            name_file_dowload = get_file_name_expert()
+            print(name_file_dowload[int(prompt_counter_aws)])
+            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file,code=302)
+
+        elif prompt_name=="Semi-spontaneous":
+
+            prompt_counter_aws=1
+            print(prompt_counter_aws)
+            name_file_dowload = get_file_name_expert()
+            print(name_file_dowload[int(prompt_counter_aws)])
+            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file,code=302)
+
+        elif prompt_name=="Non-spontaneous":
+
+            prompt_counter_aws=2
+            print(prompt_counter_aws)
+            name_file_dowload = get_file_name_expert()
+            print(name_file_dowload[int(prompt_counter_aws)])
+            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file,code=302)
+
+        elif prompt_name== "Another_type_of_prompt":
+            prompt_counter_aws=3
+            print(prompt_counter_aws)
+            name_file_dowload = get_file_name_expert()
+            print(name_file_dowload[int(prompt_counter_aws)])
+            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file,code=302)
+
 
 
 
