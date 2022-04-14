@@ -107,6 +107,7 @@ def get_media(media_got):
     f.close()
     file_path = './Audios/'+name+'.wav'
     aws_upload(name,file_path,get_language(language))
+    os.remove(file_path) # remove audio from Audio folder. To keep server light
     print(file_path)
     return 1
 
