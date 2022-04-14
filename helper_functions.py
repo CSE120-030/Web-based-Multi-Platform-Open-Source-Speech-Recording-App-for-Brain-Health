@@ -4,14 +4,12 @@ from database import *
 from flask_login import UserMixin
 
 
-
 # Create user associated with patient
 def create_language(name,prefix):
     language_entry = Language(name=name,prefix=prefix)
     db.session.add(language_entry)
     db.session.commit()
     return language_entry
-
 
 
 def create_list_group(promptId,groupId):
@@ -30,7 +28,6 @@ def create_type_of_media(name,extension):
     return tom_entry
 
 
-
 def create_patient(username, password, firstName, lastName, languageId,e, expertId, dob, sex):
     username_exists = db.session.query(User).filter(User.username==username).first() is not None
     if username_exists:
@@ -46,11 +43,13 @@ def create_patient(username, password, firstName, lastName, languageId,e, expert
         db.session.commit()
         return patient_entry
 
+
 def create_image(name, filePath):
     image_entry = Image(filePath=filePath, name=name)
     db.session.add(image_entry)
     db.session.commit()
     return image_entry
+
 
 def create_group_of_prompt(name): # group of prompts
     gop_entry = GroupOfPrompt(name=name)
@@ -58,11 +57,13 @@ def create_group_of_prompt(name): # group of prompts
     db.session.commit()
     return gop_entry
 
+
 def create_type_of_prompt(name, description):
     top_entry  = TypeOfPrompt(name=name,description=description)
     db.session.add(top_entry)
     db.session.commit()
     return top_entry
+
 
 def create_expert(username, password, firstName, lastName, licenseNumber, e):
     username_exists = db.session.query(User).filter(User.username == username).first() is not None
@@ -74,8 +75,6 @@ def create_expert(username, password, firstName, lastName, licenseNumber, e):
         db.session.add(expert_entry)
         db.session.commit()
         return expert_entry
-
-
 
 
 # Get user given username (used for login)
@@ -115,10 +114,12 @@ def add_prompt_to_group(groupName,prompt):
 
     return list_group
 
+
 def get_list_group_id():
     id = db.session.query(ListGroup).order_by(ListGroup.listGroupId.desc()).first()
     #print(id.listGroupId)
     return id.listGroupId
+
 
 def create_asg(group_id,date_of_asg,sop,expertN,expert_id,patient_id):
     # get expert
@@ -134,6 +135,7 @@ def create_asg(group_id,date_of_asg,sop,expertN,expert_id,patient_id):
     print(asg_entry)
     return asg_entry
 
+
 def create_media(media_note,file_path,asg,prompt,type_media):
     # get assignment
     asg_id = db.session.query(Assignment).filter(Assignment.assignmentId==asg).first()
@@ -147,6 +149,7 @@ def create_media(media_note,file_path,asg,prompt,type_media):
     print(media_entry)
     return media_entry
 
+
 def get_expert(username):
     user_name = db.session.query(User).filter(User.username==username).first()
     if user_name is not None:
@@ -156,13 +159,12 @@ def get_expert(username):
         e = db.session.query(Expert).filter(Expert.userId==user_id).first()
         print("email: ",e.e)
         print("User id is:", user_id)
-
-
     else:
         print("Username does not exist")
         return -1
 
     return user_id
+
 
 # get all media files for a given patient
 def get_media_file(username):
@@ -174,9 +176,6 @@ def get_media_file(username):
     for m, asg in media_file:
         print("Media Id:{} MediaNote: {} filePath: {} Media.assignmentId:{} promptId: {} typeOfMediaId: {} Assignments.assignmetId: {} dateOfAssignment:{} stateOfPrompt:{} expertNote:{} groupOfPromptsId: {} expertId: {} patientId: {}"
         .format(m.mediaId,m.mediaNote,m.filePath,m.assignmentId,m.promptId,m.typeOfMediaId,asg.assignmentId,asg.dateOfAssignment,asg.stateOfPrompt,asg.expertNote,asg.groupOfPromptsId,asg.expertId,asg.patientId) )
-
-
-
     return media_file
 
 
