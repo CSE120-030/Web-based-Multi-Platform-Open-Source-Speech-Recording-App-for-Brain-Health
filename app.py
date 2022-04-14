@@ -12,34 +12,38 @@ from urllib.request import urlopen
 
 from copy import deepcopy
 from flask_paginate import Pagination, get_page_args
-#app = Flask(__name__)
+
+# app = Flask(__name__)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'load'
-app.secret_key = 'keep it secret, keep it safe' # Add this to avoid an error
+app.secret_key = 'keep it secret, keep it safe'  # Add this to avoid an error
 
-prompt_list=[]
-list_length=0
-MEDIA_FOLDER = os.path.join('static','Images')
+prompt_list = []
+list_length = 0
+MEDIA_FOLDER = os.path.join('static', 'Images')
 app.config['UPLOAD_FOLDER'] = MEDIA_FOLDER
 image_name = ""
-prompt_counter=0
+prompt_counter = 0
 
-prompt_counter_aws=-1
+prompt_counter_aws = -1
+
+
 @login_manager.user_loader
 def load_user(user_id):
+    return get_user_by_id(user_id)
 
-	return get_user_by_id(user_id)
 
 @app.route('/')
 def load():
     if current_user.is_authenticated:
         if current_user.is_patient():
-            return redirect(url_for("patientPortal",patient_name=current_user.get_name()))
+            return redirect(url_for("patientPortal", patient_name=current_user.get_name()))
         elif current_user.is_expert():
-            return redirect(url_for("expertPortal",expert_name=current_user.get_name()))
+            return redirect(url_for("expertPortal", expert_name=current_user.get_name()))
     return render_template("signUp.html")
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -50,7 +54,7 @@ def login():
         elif current_user.is_expert():
             return redirect(url_for('expertPortal', expert_name=current_user.get_name()))
 
-     # Get user - if function doesn't return actual user, abort
+    # Get user - if function doesn't return actual user, abort
     user = get_user_by_name(username=request.json['username'])
     print(user)
     if isinstance(user, int):
@@ -67,82 +71,84 @@ def login():
         return redirect(url_for('expertPortal', expert_name=user.get_name()))
     return redirect(url_for('load'))
 
-@app.route('/expertPortal/', methods=['POST','GET'])
+
+@app.route('/expertPortal/', methods=['POST', 'GET'])
 @login_required
-def expertPortal():
-    if request.method=="GET":
-        return render_template("expertPortal.html",prompts = get_file_name_expert(), table= info_expert_portal())
+def expert_portal():
+    if request.method == "GET":
+        return render_template("expertPortal.html", prompts=get_file_name_expert(), table=info_expert_portal())
 
 
 @app.route('/patientPortal/', methods=['POST', 'GET'])
 @login_required
-def patientPortal():
+def patient_portal():
     if request.method == "GET":
-        return render_template("patientPortal.html",your_assignments =get_assignments())
+        return render_template("patientPortal.html", your_assignments=get_assignments())
 
     if request.method == "POST":
         print("in post function")
         print(request.json)
-        list_returned = asg_to_do(request.json);
+        list_returned = asg_to_do(request.json)
         print("right after asg to do was called")
         print(list_returned)
-        print("list_length:",list_length)
+        print("list_length:", list_length)
         for item in list_returned:
             new_dict = copy.deepcopy(item)
             prompt_list.append(new_dict)
         print("after for loop")
         print("printing prompt list")
         print(prompt_list)
-        #return render_template("patientPortal.html")#get_asg_name=asg_to_do(request.json))
-        return render_template("prompt.html")#redirect(url_for("do_prompts",prompt_id=0))
+        # return render_template("patientPortal.html")#get_asg_name=asg_to_do(request.json))
+        return render_template("prompt.html")  # redirect(url_for("do_prompts",prompt_id=0))
 
 
 @app.route('/patientPortal/do_prompts/<prompt_id>', methods=['POST', 'GET'])
 @login_required
 def do_prompts(prompt_id):
-    print("we got prompt id:",prompt_id)
-    if request.method=="GET":
-        #print("get method")
-        #print(get_prompt_from_list(1))
+    print("we got prompt id:", prompt_id)
+    if request.method == "GET":
+        # print("get method")
+        # print(get_prompt_from_list(1))
         try:
             global image_name
             image = get_prompt_from_list(prompt_id)
 
             for i in image:
                 print(type(i))
-                print("i: ",i)
-                imageId = i["imageId"]
+                print("i: ", i)
+                image_id = i["imageId"]
 
-
-            image_path = load_prompt_photo(imageId) # get image name
-            image_name = load_prompt_photo(imageId)
+            image_path = load_prompt_photo(image_id)  # get image name
+            image_name = load_prompt_photo(image_id)
             full_filename = os.path.join(app.config['UPLOAD_FOLDER'], image_path)
             print(image_path)
             print(full_filename)
-            return render_template("prompt.html",specific_prompt=get_prompt_from_list(prompt_id),prompt_queue=get_queue_from_prompt_list(),image = image_path)#,promps=group_name)
+            return render_template("prompt.html",
+                                   specific_prompt=get_prompt_from_list(prompt_id),
+                                   prompt_queue=get_queue_from_prompt_list(),
+                                   image=image_path)  # ,promps=group_name)
 
-        except:
+        except Exception:
             print("An error happened")
             return redirect(url_for("do_prompts", prompt_id=prompt_id))
 
-
-    if request.method=="POST":
+    if request.method == "POST":
         return render_template("prompt.html", media_sent=get_media(request.files['audio_data']))
 
 
-@app.route("/load_promp",methods=["GET"])
+@app.route("/load_promp", methods=["GET"])
 def load_prompts():
-    #asg_obj = assignment()
-    #control_asg = asg_obj.get_asg_counter()
-    #control_asg +=1
-    #asg_obj.set_asg_counter(control_asg)
-    #print("asg id: ", control_asg)
+    # asg_obj = assignment()
+    # control_asg = asg_obj.get_asg_counter()
+    # control_asg +=1
+    # asg_obj.set_asg_counter(control_asg)
+    # print("asg id: ", control_asg)
     global prompt_counter
-    prompt_counter+=1
-    return redirect(url_for("do_prompts",prompt_id=prompt_counter))
+    prompt_counter += 1
+    return redirect(url_for("do_prompts", prompt_id=prompt_counter))
 
 
-@app.route("/getimage", methods = ['POST','GET'])
+@app.route("/getimage", methods=['POST', 'GET'])
 def get_image():
     if request.method == "GET":
         global image_name
@@ -151,80 +157,86 @@ def get_image():
         return image_name
 
 
-
 @app.route('/media', methods=['POST', 'GET'])
 def media():
-    if request.method=="GET":
+    if request.method == "GET":
         return render_template("media.html")
-    if request.method=="POST":
+    if request.method == "POST":
         print("in post method")
 
         print(request.files['audio_data'])
-        return render_template("media.html",media_sent=get_media(request.files['audio_data']))
+        return render_template("media.html", media_sent=get_media(request.files['audio_data']))
 
-@app.route('/expertPortal/createPrompt/', methods=['GET','POST'])
+
+@app.route('/expertPortal/createPrompt/', methods=['GET', 'POST'])
 @login_required
-def createPrompt():
-    if request.method=="GET":
-        return render_template("create_prompt.html",top=get_all_prompts(),expert=getExpert(),languages=get_languages())
+def new_prompt_request():
+    """Function called when prompt generation has been requested. Asks user to input prompt details."""
+    if request.method == "GET":
+        return render_template("create_prompt.html",
+                               top=get_all_prompts(),
+                               expert=get_expert(),
+                               languages=get_languages())
 
-    if request.method=="POST":
+    if request.method == "POST":
         print("in post method")
         print(request.json)
-        return render_template("create_prompt.html", promptCreation=prompt_creation(request.json))
+        return render_template("create_prompt.html",
+                               promptCreation=generate_prompt_from_request(request.json))
 
-@app.route('/expertPortal/download_prompt/<prompt_name>', methods=['GET','POST'])
+
+@app.route('/expertPortal/download_prompt/<prompt_name>', methods=['GET', 'POST'])
 @login_required
 def get_prompt(prompt_name):
     global prompt_counter_aws
-    if request.method=='GET':
+    if request.method == 'GET':
         print(prompt_name)
-        if prompt_name=="Spontaneous":
+        if prompt_name == "Spontaneous":
 
-            prompt_counter_aws=0
+            prompt_counter_aws = 0
             print(prompt_counter_aws)
             name_file_dowload = get_file_name_expert()
             print(name_file_dowload[int(prompt_counter_aws)])
-            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
-            return redirect(file,code=302)
+            file = aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file, code=302)
 
-        elif prompt_name=="Semi-spontaneous":
+        elif prompt_name == "Semi-spontaneous":
 
-            prompt_counter_aws=1
+            prompt_counter_aws = 1
             print(prompt_counter_aws)
             name_file_dowload = get_file_name_expert()
             print(name_file_dowload[int(prompt_counter_aws)])
-            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
-            return redirect(file,code=302)
+            file = aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file, code=302)
 
-        elif prompt_name=="Non-spontaneous":
+        elif prompt_name == "Non-spontaneous":
 
-            prompt_counter_aws=2
+            prompt_counter_aws = 2
             print(prompt_counter_aws)
             name_file_dowload = get_file_name_expert()
             print(name_file_dowload[int(prompt_counter_aws)])
-            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
-            return redirect(file,code=302)
+            file = aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file, code=302)
 
-        elif prompt_name== "Another_type_of_prompt":
-            prompt_counter_aws=3
+        elif prompt_name == "Another_type_of_prompt":
+            prompt_counter_aws = 3
             print(prompt_counter_aws)
             name_file_dowload = get_file_name_expert()
             print(name_file_dowload[int(prompt_counter_aws)])
-            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
-            return redirect(file,code=302)
-
-
-
+            file = aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file, code=302)
 
 
 @app.after_request
 def after_request(response):
-  response.headers.add('Access-Control-Allow-Origin', '*')
-  response.headers.add("Access-Control-Allow-Methods", "GET,DELETE,POST,PUT")
-  response.headers.add("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
-  #response.headers.add('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token')
-  return response
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add("Access-Control-Allow-Methods", "GET,DELETE,POST,PUT")
+    response.headers.add("Access-Control-Allow-Headers",
+                         "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, "
+                         "Access-Control-Request-Method, Access-Control-Request-Headers")
+    # response.headers.add('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token')
+    return response
+
 
 if __name__ == '__main__':
     app.run()
