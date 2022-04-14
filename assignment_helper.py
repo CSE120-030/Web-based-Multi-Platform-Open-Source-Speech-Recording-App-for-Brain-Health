@@ -63,15 +63,17 @@ def get_prompt_from_list(prompt_id):
     global prompt_info
     print("prompt length info",len(prompt_info))
     print("in get prompt list function")
-    if 0 <= new_prompt_id < len(prompt_info): # make sure the index is in range
-        #print("prompt info hard coded:", prompt_info[new_prompt_id])
-        dict_to_return.append(prompt_info[new_prompt_id])
-        print(dict_to_return)
-        load_prompt_photo(dict_to_return[0]["imageId"])
-        return dict_to_return
-    else:
-        print("list is empty")
-        return "empty"
+    try:
+        if 0 <= new_prompt_id < len(prompt_info): # make sure the index is in range
+            #print("prompt info hard coded:", prompt_info[new_prompt_id])
+            dict_to_return.append(prompt_info[new_prompt_id])
+            print(dict_to_return)
+            load_prompt_photo(dict_to_return[0]["imageId"])
+            return dict_to_return
+    except:
+
+            print("list is empty")
+            return "empty"
 
     #i = next((item for item in prompt_info if item["promptId"] == new_prompt_id), None)
     #print(i)

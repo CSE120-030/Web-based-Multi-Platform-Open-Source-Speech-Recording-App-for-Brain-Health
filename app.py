@@ -24,7 +24,7 @@ list_length=0
 MEDIA_FOLDER = os.path.join('static','Images')
 app.config['UPLOAD_FOLDER'] = MEDIA_FOLDER
 image_name = ""
-prompt_counter=-1
+prompt_counter=0
 
 prompt_counter_aws=-1
 @login_manager.user_loader
@@ -104,21 +104,27 @@ def do_prompts(prompt_id):
     if request.method=="GET":
         #print("get method")
         #print(get_prompt_from_list(1))
-        global image_name
-        image = get_prompt_from_list(prompt_id)
+        try:
+            global image_name
+            image = get_prompt_from_list(prompt_id)
 
-        for i in image:
-            print(type(i))
-            print("i: ",i)
-            imageId = i["imageId"]
+            for i in image:
+                print(type(i))
+                print("i: ",i)
+                imageId = i["imageId"]
 
 
-        image_path = load_prompt_photo(imageId) # get image name
-        image_name = load_prompt_photo(imageId)
-        full_filename = os.path.join(app.config['UPLOAD_FOLDER'], image_path)
-        print(image_path)
-        print(full_filename)
-        return render_template("prompt.html",specific_prompt=get_prompt_from_list(prompt_id),prompt_queue=get_queue_from_prompt_list(),image = image_path)#,promps=group_name)
+            image_path = load_prompt_photo(imageId) # get image name
+            image_name = load_prompt_photo(imageId)
+            full_filename = os.path.join(app.config['UPLOAD_FOLDER'], image_path)
+            print(image_path)
+            print(full_filename)
+            return render_template("prompt.html",specific_prompt=get_prompt_from_list(prompt_id),prompt_queue=get_queue_from_prompt_list(),image = image_path)#,promps=group_name)
+
+        except:
+            print("An error happened")
+            return redirect(url_for("do_prompts", prompt_id=prompt_id))
+
 
     if request.method=="POST":
         return render_template("prompt.html", media_sent=get_media(request.files['audio_data']))
