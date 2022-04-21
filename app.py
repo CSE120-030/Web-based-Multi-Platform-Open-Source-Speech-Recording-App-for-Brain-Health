@@ -72,6 +72,11 @@ def do_prompts():
     if request.method=="GET":
         return render_template("prompt.html")
 
+@app.route('/terms/', methods=['POST','GET'])
+@login_required
+def expertPortal():
+    if request.method=="GET":
+        return render_template("terms.html")
 
 
 @app.route('/media', methods=['POST', 'GET'])
