@@ -14,6 +14,15 @@ d = date(2000,9,15)
 
 # create image
 #create_image("image1","//images//some_path")
+#create_image("number_one",'./Images/one.png')
+#create_image("number_two",'./Images/two.png')
+#create_image("number_three",'./Images/three.png')
+#create_image("number_four",'./Images/four.png')
+#create_image("number_five",'./Images/five.png')
+#create_image("number_six",'./Images/six.png')
+#create_image("number_seven",'./Images/seven.png')
+#create_image("blank",'./Images/blank.jpg')
+#create_image("test",'./Images/test.jpg')
 
 #create type_prompt() # the description can be changed later
 #create_type_of_prompt("Spontaneous","Spontaneous prompt")
@@ -32,7 +41,8 @@ d = date(2000,9,15)
 
   #create prompt
 #create_prompt(description="Prompt2",languageId=1,imageId=1,expertId=1,topId=1)
-
+#create_prompt(description="Semi spontaneous Prompt",languageId=1,imageId=9,expertId=1,topId=2)
+#create_prompt(description="Non- spontaneous Prompt",languageId=1,imageId=9,expertId=1,topId=3)
 #assign group to prompt
 #add_prompt_to_group("Group1",1)
 #get_list_group_id()
@@ -61,4 +71,13 @@ d = date(2000,9,15)
 #patient="patient1" #username
 #get_media_file(username=patient)
 
-get_all_prompts()
+#get_all_prompts()
+
+#########################################################################################################################
+
+#create_group_of_prompt(name="General")
+#create_list_group(promptId=7,groupId=2) # semi spontaneous prompt to general list of prompts
+#create_list_group(promptId=8,groupId=2) # Non-spontaneous prompt to general list of prompts
+
+add_prompt_to_group(groupName="General",prompt=7)
+add_prompt_to_group(groupName="General",prompt=8)

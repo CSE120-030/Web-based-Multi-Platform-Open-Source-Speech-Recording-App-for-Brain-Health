@@ -12,24 +12,12 @@ def create_language(name,prefix):
     db.session.commit()
     return language_entry
 
-def create_prompt(description, languageId, expertId, imageId,topId):
-    # create object of group_of_prompt
 
-    # get the type pf prompt id
-    type_of_prompt_id = db.session.query(TypeOfPrompt).filter(TypeOfPrompt.typeOfPromptId==topId).first()
-    # get the language
-    language_id = db.session.query(Language).filter(Language.languageId==languageId).first()
-    #get the expert
-    expert_id = db.session.query(Expert).filter(Expert.expertId==expertId).first()
-    # get the image
-    image_id = db.session.query(Image).filter(Image.imageId==imageId).first()
-    prompt_entry = Prompt(descriptionPrompt=description,languageId=language_id.languageId,expertId=expert_id.expertId,imageId=image_id.imageId,typeOfPromptId=type_of_prompt_id.typeOfPromptId)
-    db.session.add(prompt_entry)
-    db.session.commit()
-    return prompt_entry
 
 def create_list_group(promptId,groupId):
-    list_group_entry = ListGroup(groupOfPrompt =groupId,prompt=promptId)
+    prompt = db.session.query(Prompt).filter(Prompt.promptId==promptId).first()
+    group = db.session.query(GroupOfPrompt).filter(GroupOfPrompt.groupOfPromptId==groupId).first()
+    list_group_entry = ListGroup(groupOfPrompt =group.groupOfPromptId,prompt=prompt.promptId)
     db.session.add(list_group_entry)
     db.session.commit()
     return  list_group_entry
@@ -139,6 +127,7 @@ def create_asg(group_id,date_of_asg,sop,expertN,expert_id,patient_id):
     patient = db.session.query(Patient).filter(Patient.patientId==patient_id).first()
     #get group of Prompts
     group = db.session.query(GroupOfPrompt).filter(GroupOfPrompt.groupOfPromptId==group_id).first()
+
     asg_entry = Assignment(groupOfPromptsId=group.groupOfPromptId,dateOfAssignment=date_of_asg,stateOfPrompt=sop,expertNote=expertN,expertId=expert.expertId,patientId=patient.patientId)
     db.session.add(asg_entry)
     db.session.commit()

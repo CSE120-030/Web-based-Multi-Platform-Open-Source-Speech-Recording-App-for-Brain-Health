@@ -9,16 +9,23 @@
 <h1>Prompt creation</h1>
 <h3>Prompt Description:
 </h3>
-<textarea rows="10" cols="100" placeholder="Enter Prompt Description">
-
-</textarea>
-<h3
-    >Type of Prompt: </h3>
-<select name="Type_of_Prompt">
+<textarea rows="10" cols="100" placeholder="Enter Prompt Description" id="text_description"></textarea>
+<h3>Type of Prompt: </h3>
+<select name="Type_of_Prompt" id="type_of_prompt">
 {% for item in top %}
 <option value="{{item.type_of_prompt}}">{{item.prompt_name}}</option>
 {% endfor %}
 </select>
+
+<h3>Language: </h3>
+
+<select name="Language_selection" id="type_of_language">
+{% for i in languages %}
+<option value="{{i.language_id}}">{{i.name}}</option>
+{% endfor %}
+</select>
+
+
 <h3 for="image">Choose a image for prompt:</h3>
 
 <input type="file"

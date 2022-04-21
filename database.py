@@ -74,10 +74,10 @@ class User(UserMixin,db.Model):
         patient = db.session.query(Patient).filter(Patient.userId == self.userId).first()
         name = None
         if patient is not None:
-            name = patient.firstName + patient.lastName
+            name = patient.firstName +"+"+ patient.lastName
         expert = db.session.query(Expert).filter(Expert.userId == self.userId).first()
         if expert is not None:
-            name = expert.firstName+expert.lastName
+            name = expert.firstName+"+"+expert.lastName
 
         return name
 
