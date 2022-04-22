@@ -1,6 +1,8 @@
 import json
 
 from database import *
+import sqlite3 as sql
+
 from flask_login import UserMixin
 
 
@@ -32,11 +34,15 @@ def create_type_of_media(name,extension):
 
 
 def create_patient(username, password, firstName, lastName, languageId,e, expertId, dob, sex):
+    #con = sql.connect("sqlite:///static/speechDB.sqlite")
+
     username_exists = db.session.query(User).filter(User.username==username).first() is not None
     if username_exists:
         print("Sorry, username is taken")
     else:
-        user_entry = User(username=username,password=password)
+
+        user_entry = User(username=username,password=password,confirmed=False)
+
         # get language
         language = db.session.query(Language).filter(Language.languageId == languageId).first()
         # get expert

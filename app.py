@@ -1,11 +1,19 @@
 import copy
+from flask_mail import Message,Mail
 from flask import Flask, render_template, url_for, redirect, abort, request, send_file
 from flask_login import current_user, login_user, login_required, LoginManager, logout_user
+
+from e import send_email
 from helper_functions import *
 from media_bucket import *
 from prompt_helper_functions import *
 from assignment_helper import *
+from registration import *
+from database import *
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
+#from token import *
 from config import promptCounter
+
 import os
 import requests
 from urllib.request import urlopen
@@ -13,6 +21,11 @@ from urllib.request import urlopen
 from copy import deepcopy
 from flask_paginate import Pagination, get_page_args
 #app = Flask(__name__)
+
+
+app.config.from_pyfile('config.cfg')
+#mail = Mail(app)
+s = URLSafeTimedSerializer('Thisisasecret!')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -27,6 +40,14 @@ image_name = ""
 prompt_counter=0
 
 prompt_counter_aws=-1
+
+@app.route('/logout', methods = ['GET'])
+@login_required
+def logout():
+	logout_user()
+	return redirect(url_for('load'))
+
+
 @login_manager.user_loader
 def load_user(user_id):
 
@@ -215,6 +236,43 @@ def get_prompt(prompt_name):
             return redirect(file,code=302)
 
 
+@app.route('/expertPortal/registration/', methods=['GET','POST'])
+@login_required
+def registration():
+    if request.method=='POST':
+        register_patient(request.json)
+        t = generate_confirmation_token(request.json['email'])
+        confirm_url = url_for('confirm_email', token=t, _external=True)
+        html = render_template('activate.html', confirm_url=confirm_url)
+        subject = "Please confirm your email"
+        send_email(request.json['email'], subject, html)
+
+        flash('A confirmation email has been sent via email.', 'success')
+        return redirect(url_for("expertPortal"))
+        #return render_template("registration.html", register = register_patient(request.json))
+
+    elif request.method =='GET':
+
+        return render_template("registration.html", languages = get_languages() )
+
+
+@app.route('/patientPortal/registration/<token>',methods=['GET','POST'])
+@login_required
+def confirm_email(token):
+    if request.method=="GET":
+        try:
+            email = confirm_token(token)
+            print(email)
+        except:
+            flash('The confirmation link is invalid or has expired.', 'danger')
+
+        user = db.session.query(User).join(Patient,Patient.userId==User.userId).filter(Patient.e==email).first()
+        #change_status = db.session.query(User).filter(User.username==user[1]).first()
+        user.confirmed=True
+        print(user.confirmed)
+        db.session.commit()
+        # add confirm column here
+        return render_template("registration_done.html")
 
 
 

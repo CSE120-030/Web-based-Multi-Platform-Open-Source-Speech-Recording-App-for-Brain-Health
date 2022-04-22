@@ -64,6 +64,7 @@ class User(UserMixin,db.Model):
     userId = db.Column(db.Integer, primary_key= True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(50), nullable= False)
+    confirmed =db.Column(db.Boolean, nullable=True)
 
     def is_patient(self):
         return db.session.query(Patient).filter(Patient.userId == self.userId).first() is not None
