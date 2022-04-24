@@ -55,15 +55,21 @@ def load_user(user_id):
 
 @app.route('/')
 def load():
+    print("in load function")
     if current_user.is_authenticated:
-        if current_user.is_patient():
+        if current_user.is_patient() and current_user.check_confirmation()==True:
             return redirect(url_for("patientPortal",patient_name=current_user.get_name()))
+        elif current_user.is_patient() and current_user.check_confirmation()==False:
+            return redirect(url_for("unconfirmed"))
+
         elif current_user.is_expert():
             return redirect(url_for("expertPortal",expert_name=current_user.get_name()))
+
     return render_template("signUp.html")
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    print("in login function")
     # User already authenticated - serve appropriate portal page
     if current_user.is_authenticated:
         if current_user.is_patient():
@@ -82,10 +88,14 @@ def login():
     # If password is correct, serve appropriate portal page
     login_user(user)
     # If password is correct, serve appropriate portal page
-    if user.is_patient():
+    if user.is_patient() and user.check_confirmation()==True:
+        print("in user is patient")
         return redirect(url_for('patientPortal', patient_name=user.get_name()))
+    elif current_user.is_patient() and user.check_confirmation() == False:
+        return redirect(url_for('unconfirmed'))
     elif user.is_expert():
         return redirect(url_for('expertPortal', expert_name=user.get_name()))
+
     return redirect(url_for('load'))
 
 @app.route('/expertPortal/', methods=['POST','GET'])
@@ -274,6 +284,22 @@ def confirm_email(token):
         # add confirm column here
         return render_template("registration_done.html")
 
+@app.route('/patientPortal/unconfirmed' ,methods=['GET','POST'])
+@login_required
+def unconfirmed():
+
+    return render_template('unconfirmed.html')
+
+@app.route('/patientPortal/resend',methods=['GET','POST'])
+@login_required
+def resend_confirmation():
+    patient = db.session.query(Patient).join(User,User.userId==Patient.userId).filter(User.userId==current_user.get_id())
+    token = generate_confirmation_token(patient.e)
+    confirm_url = url_for('confirm_email', token=token, _external=True)
+    html = render_template('activate.html', confirm_url=confirm_url)
+    subject = "Please confirm your email"
+    send_email(patient.e, subject, html)
+    return redirect(url_for('unconfirmed'))
 
 
 @app.after_request

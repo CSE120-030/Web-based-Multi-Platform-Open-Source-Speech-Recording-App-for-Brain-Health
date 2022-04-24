@@ -130,10 +130,11 @@ def create_asg(group_id,date_of_asg,sop,expertN,expert_id,patient_id):
     # get expert
     expert = db.session.query(Expert).filter(Expert.expertId==expert_id).first()
     # get patient
-    patient = db.session.query(Patient).filter(Patient.patientId==patient_id).first()
+    # actually patient id is the user id, so we have to join the two tables together
+    patient = db.session.query(Patient).join(User, Patient.userId==User.userId).filter(User.userId==patient_id).first()
+    print("patient id is :", patient.patientId)
     #get group of Prompts
     group = db.session.query(GroupOfPrompt).filter(GroupOfPrompt.groupOfPromptId==group_id).first()
-
     asg_entry = Assignment(groupOfPromptsId=group.groupOfPromptId,dateOfAssignment=date_of_asg,stateOfPrompt=sop,expertNote=expertN,expertId=expert.expertId,patientId=patient.patientId)
     db.session.add(asg_entry)
     db.session.commit()

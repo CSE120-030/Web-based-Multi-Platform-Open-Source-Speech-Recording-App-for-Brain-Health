@@ -1,6 +1,9 @@
-from datetime import *
+
 from flask_login import current_user
 from helper_functions import *
+import datetime
+#from datetime import *
+
 
 
 from flask import flash
@@ -125,6 +128,7 @@ def get_assignments():
 
 
     else:
+
         date_asg = datetime.datetime.now()
         print("Assingment has NOT been created")
         print("creating assignment")

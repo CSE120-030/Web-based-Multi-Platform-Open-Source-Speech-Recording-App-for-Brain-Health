@@ -89,6 +89,9 @@ class User(UserMixin,db.Model):
     def check_password(self,password):
         return self.password ==password
 
+    def check_confirmation(self):
+        return self.confirmed
+
 
 
 

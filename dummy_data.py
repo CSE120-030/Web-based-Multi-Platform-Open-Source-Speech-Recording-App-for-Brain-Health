@@ -5,9 +5,10 @@ from prompt_helper_functions import *
 from assignment_helper import *
 from media_bucket import *
 from datetime import date
+
 language=1
 expert=1
-d = date(2000,9,15)
+#d = date(2000,9,15)
 #print(d)
 #create_expert("expert1","1234","fName","lName","00000","123@asd.com")
 #create_language(name="English",prefix="eng")
@@ -50,7 +51,7 @@ d = date(2000,9,15)
 #get_list_group_id()
 
 #create assignment
-#date_asg = datetime.datetime.now()
+date_asg = datetime.datetime.now()
 #state_of_prompt =0 #0 for unfinished, 1 for finished
 #expert_asg=1
 #patient_asg=1
