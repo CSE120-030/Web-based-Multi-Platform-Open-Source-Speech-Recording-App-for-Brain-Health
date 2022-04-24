@@ -1,0 +1,52 @@
+
+h1{
+    text-align: center;
+    color: #1A1B41;
+}
+
+body{
+    background-color:#EBE7E0;
+}
+
+.loginBox{
+    width:450px;
+    height:290px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin: 200px auto auto auto;
+    border-style:solid;
+
+}
+
+#username{
+    width: 300px;
+    height: 30px;
+    border-style: solid;
+    border-color:#1A1B41;
+    border-radius: 5px;
+    padding-left: 8px;
+    margin-left:70px;
+    margin-bottom: 10px;
+}
+#password{
+    width: 300px;
+    height: 30px;
+    border-style: solid;
+    border-color:#1A1B41;
+    border-radius: 5px;
+    padding-left: 8px;
+    margin-left: 70px;
+    margin-bottom:10px;
+
+}
+#loginButton{
+    box-shadow: none;
+    font-size: 22px;
+    padding: 10px;
+    background-color:#165EA0;
+    color:white;
+    margin-left: 190px;
+    border:none;
+
+}
