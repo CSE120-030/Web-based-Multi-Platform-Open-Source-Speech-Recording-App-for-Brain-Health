@@ -55,6 +55,13 @@ def login():
         return redirect(url_for('expertPortal', expert_name=user.get_name()))
     return redirect(url_for('load'))
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
+
+
 @app.route('/expertPortal/', methods=['POST','GET'])
 @login_required
 def expertPortal():
@@ -76,8 +83,6 @@ def patientPortal():
 def do_prompts():
     if request.method=="GET":
         return render_template("prompt.html")
-
-
 
 @app.route('/media', methods=['POST', 'GET'])
 def media():
