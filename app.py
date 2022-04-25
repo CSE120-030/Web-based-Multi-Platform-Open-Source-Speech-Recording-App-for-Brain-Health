@@ -15,7 +15,12 @@ app.secret_key = 'keep it secret, keep it safe' # Add this to avoid an error
 def load_user(user_id):
 	return get_user_by_id(user_id)
 
-@app.route('/')
+@app.route('/', methods=['POST','GET'])
+def home():
+    if request.method=="GET":
+        return render_template("homePage.html")
+
+@app.route('/authentication')
 def load():
     if current_user.is_authenticated:
         if current_user.is_patient():
