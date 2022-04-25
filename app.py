@@ -215,6 +215,7 @@ def get_prompt(prompt_name):
             prompt_counter_aws=0
             print(prompt_counter_aws)
             name_file_dowload = get_file_name_expert()
+            print("audio to download:" + name_file_dowload[int(prompt_counter_aws)])
             print(name_file_dowload[int(prompt_counter_aws)])
             file=aws_download(name_file_dowload[int(prompt_counter_aws)])
             return redirect(file,code=302)
@@ -224,7 +225,7 @@ def get_prompt(prompt_name):
             prompt_counter_aws=1
             print(prompt_counter_aws)
             name_file_dowload = get_file_name_expert()
-            print(name_file_dowload[int(prompt_counter_aws)])
+            print("audio to download:"+name_file_dowload[int(prompt_counter_aws)])
             file=aws_download(name_file_dowload[int(prompt_counter_aws)])
             return redirect(file,code=302)
 

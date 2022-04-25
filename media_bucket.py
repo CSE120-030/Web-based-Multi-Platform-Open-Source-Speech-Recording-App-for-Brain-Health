@@ -14,9 +14,10 @@ dic=[]
 name =""
 file_path=""
 prompt_counter=0
-language =""
+languagee =""
 prompt_expert = ""
-BUCKET_PREFIX = "330-personal-test-bucket"
+#BUCKET_PREFIX = "330-personal-test-bucket"
+BUCKET_PREFIX = "ucm-cse120-330"
 # Replace above with "ucm-cse-120-330-" when credentials are given.
 def get_patient_id():
     if current_user.is_authenticated:
@@ -85,6 +86,8 @@ def asg_specific_name(promptId):
     global language
     name = dict_to_return[promptId][1] +"_"+ dict_to_return[promptId][2] +"_"+ str(dict_to_return[promptId][3]) +"_"+ dict_to_return[promptId][4] +"_"+ dict_to_return[promptId][5] +"_"+ str(dict_to_return[promptId][6])
     language = dict_to_return[promptId][2] # get the language prefix
+    languagee=get_language(language)
+    print(languagee)
     print(name)
     print(type(name))
 
@@ -134,9 +137,11 @@ def aws_upload(file_key: str, file_to_upload: str, language: str):
         language: Bucket to shove it in. Buckets follow the same naming convention, so all you need to input is the
         language of the file.
     """
+
     aws_client = boto3.client('s3')
-    #aws_client.upload_file(file_to_upload, BUCKET_PREFIX+ "-"+language, file_key)
-    aws_client.upload_file(file_to_upload, BUCKET_PREFIX, file_key)
+    print("bucket is:"+BUCKET_PREFIX+"-"+language)
+    aws_client.upload_file(file_to_upload, BUCKET_PREFIX+"-"+language, file_key)
+    #aws_client.upload_file(file_to_upload, BUCKET_PREFIX+'-'+get_language(language), file_key)
     # aws_client.upload_file(file_to_upload, "ucm-cse-120-330-" + language, file_key) <<UNCOMMENT WHEN AWS SHIT HITS
 
 def aws_download(file_key: str):
@@ -144,17 +149,25 @@ def aws_download(file_key: str):
     Arguments:
         file_key: Name of the file on AWS. Also known as the key used when you called aws_upload.
     """
-    language = get_language(file_key)
+    print("the file key is:"+file_key)
+    lang = file_key.split('_')
+    print(lang[1])
+    languagee = lang[1]
+    print("bucket is:" + BUCKET_PREFIX + "-" + get_language(languagee))
     url = boto3.client('s3').generate_presigned_url(
         ClientMethod='get_object',
-        Params={'Bucket': BUCKET_PREFIX, 'Key': file_key},
+        Params={'Bucket': BUCKET_PREFIX+'-'+get_language(languagee), 'Key': file_key},
         ExpiresIn=3600)
     # url = boto3.client('s3').generate_presigned_url(
     #     ClientMethod='get_object',
     #     Params={'Bucket': BUCKET_PREFIX + language, 'Key': file_key},
     #     ExpiresIn=3600) << Replace above with this when school account is active!
     s3 = boto3.resource('s3')
-    s3.Bucket(BUCKET_PREFIX).download_file(file_key, './Downloads')
+    print(file_key)
+    #aws_client = boto3.client('s3')
+    #aws_client.download_file(BUCKET_PREFIX + "-"+get_language(languagee), file_key, "/downloads/" + file_key)
+    B= BUCKET_PREFIX+'-'+get_language(languagee)
+    s3.Bucket(B).download_file(file_key, './Downloads')
     print(url)
     return url
 
