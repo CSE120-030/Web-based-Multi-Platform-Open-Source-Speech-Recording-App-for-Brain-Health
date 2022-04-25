@@ -293,7 +293,7 @@ def unconfirmed():
 @app.route('/patientPortal/resend',methods=['GET','POST'])
 @login_required
 def resend_confirmation():
-    patient = db.session.query(Patient).join(User,User.userId==Patient.userId).filter(User.userId==current_user.get_id())
+    patient = db.session.query(Patient).join(User,User.userId==Patient.userId).filter(Patient.userId==current_user.get_id()).first()
     token = generate_confirmation_token(patient.e)
     confirm_url = url_for('confirm_email', token=token, _external=True)
     html = render_template('activate.html', confirm_url=confirm_url)
