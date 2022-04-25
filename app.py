@@ -277,9 +277,10 @@ def confirm_email(token):
         except:
             flash('The confirmation link is invalid or has expired.', 'danger')
 
-        user = db.session.query(User).join(Patient,Patient.userId==User.userId).filter(Patient.e==email).first()
+        user = db.session.query(User).join(Patient,Patient.userId==User.userId).filter(Patient.userId==get_patient_id()).first()
+        print(user)
         #change_status = db.session.query(User).filter(User.username==user[1]).first()
-        user.confirmed=True
+        user.confirmed=1
         print(user.confirmed)
         db.session.commit()
         # add confirm column here
