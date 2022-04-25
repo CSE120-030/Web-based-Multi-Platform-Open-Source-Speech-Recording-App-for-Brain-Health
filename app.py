@@ -204,7 +204,7 @@ def createPrompt():
         print(request.json)
         return render_template("create_prompt.html", promptCreation=prompt_creation(request.json))
 
-@app.route('/expertPortal/download_prompt/<prompt_name>', methods=['GET','POST'])
+@app.route('/expertPortal/download_prompt/<prompt_name>/', methods=['GET','POST'])
 @login_required
 def get_prompt(prompt_name):
     global prompt_counter_aws
@@ -245,6 +245,18 @@ def get_prompt(prompt_name):
             print(name_file_dowload[int(prompt_counter_aws)])
             file=aws_download(name_file_dowload[int(prompt_counter_aws)])
             return redirect(file,code=302)
+
+
+@app.route('/expertPortal/download_prompt/<prompt_name>/<language>/<prompt_id>/<first_name>/<last_name>/<patient_id>', methods=['GET','POST'])
+@login_required
+def get_prompt2(prompt_name,language,prompt_id,first_name,last_name,patient_id):
+    if request.method=='GET':
+        #print("audio to download:",prompt_name,language,prompt_id,first_name,last_name,patient_id)
+        file_name = prompt_name+'_'+get_prefix(language)+'_'+prompt_id+'_'+first_name+'_'+last_name+'_'+patient_id+'.wav'
+        print("file to download",file_name)
+        file = aws_download(file_name)
+        return redirect(file,code=302)
+
 
 
 @app.route('/expertPortal/registration/', methods=['GET','POST'])

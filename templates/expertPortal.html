@@ -17,7 +17,7 @@
                   <th>Language</th>
                   <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Assignment Id</th>
+                    <th>Patient Id</th>
                     <th>Prompt Id</th>
                     <th>Download</th>
 
@@ -31,9 +31,9 @@
 		                <td >{{ i.language}}</td>
                         <td >{{ i.first_name }}</td>
                     <td >{{ i.last_name }}</td>
-                    <td >{{ i.asg_id }}</td>
+                    <td >{{ i.patient_id }}</td>
                     <td >{{ i.prompt_id }}</td>
-                        <td><button class="download_prompt" onclick="download(this)"><a href="{{url_for('get_prompt',prompt_name=i.type_of_prompt)}}">Download</a></button></td>
+                        <td><button class="download_prompt" onclick="download(this)"><a href="{{url_for('get_prompt2',prompt_name=i.type_of_prompt,language = i.language,prompt_id= i.prompt_id, first_name=i.first_name,last_name=i.last_name,patient_id=i.patient_id)}}">Download</a></button></td>
                 </tr>
 				{% endfor %}
 

@@ -64,16 +64,37 @@ def get_file_name_expert():
     print(dic)
     return dic
 
+def get_file_name_expert2():
+    global prompt_expert
+    global dic
+    control=0
+    prompt_expert = db.session.query(Assignment,TypeOfPrompt.name,Language.prefix,Prompt.promptId,Patient.firstName,Patient.lastName,Patient.patientId).join(GroupOfPrompt,GroupOfPrompt.groupOfPromptId==Assignment.groupOfPromptsId).join(ListGroup,ListGroup.groupOfPromptId==GroupOfPrompt.groupOfPromptId).join(Prompt,Prompt.promptId==ListGroup.promptId).join(TypeOfPrompt,TypeOfPrompt.typeOfPromptId==Prompt.typeOfPromptId).join(Language,Language.languageId==Prompt.languageId).join(Patient,Patient.patientId==Assignment.patientId).join(Expert,Expert.expertId==Assignment.expertId).join(User,User.userId==Expert.userId).filter(User.userId==get_expert_id()).all()
+    for i in prompt_expert:
+        dict_to_return_expert.append(i)
+    print(dict_to_return_expert)
+    for i in dict_to_return_expert:
+        name_file_download = {'type_prompt':dict_to_return_expert[control][1],'language':dict_to_return_expert[control][2],'prompt_id': str(dict_to_return_expert[control][3]), 'first_name':dict_to_return_expert[control][4], 'last_name': dict_to_return_expert[control][5],  'patient_id':str(dict_to_return_expert[control][6])+ ".wav"}
+        dic.append(name_file_download)
+        control+=1
+    print(type(dic))
+    print(dic)
+    return dic
+
+def get_file_name_from_front_end(file):
+
+    return file
+
+
 def info_expert_portal():
     info_asg=[]
     control=0
-    prompts = db.session.query(Assignment,TypeOfPrompt.name,Language.name,Patient.firstName,Patient.lastName,Assignment.assignmentId,Prompt.promptId).join(GroupOfPrompt, GroupOfPrompt.groupOfPromptId==Assignment.groupOfPromptsId).join(ListGroup,ListGroup.groupOfPromptId==GroupOfPrompt.groupOfPromptId).join(Prompt,Prompt.promptId==ListGroup.promptId).join(TypeOfPrompt,TypeOfPrompt.typeOfPromptId==Prompt.typeOfPromptId).join(Language,Language.languageId==Prompt.languageId).join(Patient,Patient.patientId==Assignment.patientId).join(Expert,Expert.expertId==Assignment.expertId).join(User,User.userId==Expert.userId).filter(User.userId==get_expert_id()).all()
+    prompts = db.session.query(Assignment,TypeOfPrompt.name,Language.name,Patient.firstName,Patient.lastName,Patient.patientId,Prompt.promptId).join(GroupOfPrompt, GroupOfPrompt.groupOfPromptId==Assignment.groupOfPromptsId).join(ListGroup,ListGroup.groupOfPromptId==GroupOfPrompt.groupOfPromptId).join(Prompt,Prompt.promptId==ListGroup.promptId).join(TypeOfPrompt,TypeOfPrompt.typeOfPromptId==Prompt.typeOfPromptId).join(Language,Language.languageId==Prompt.languageId).join(Patient,Patient.patientId==Assignment.patientId).join(Expert,Expert.expertId==Assignment.expertId).join(User,User.userId==Expert.userId).filter(User.userId==get_expert_id()).all()
     for i in prompts:
         info = {'type_of_prompt':i[1],
                 'language':i[2],
                 'first_name':i[3],
                 'last_name':i[4],
-                'asg_id':i[5],
+                'patient_id':i[5],
                 'prompt_id':i[6]}
         info_asg.append(info)
     print(info_asg)
@@ -127,6 +148,18 @@ def get_language(key: str):
         return "spanish"
     else:
         return "tagalog"
+def get_prefix(language:str):
+    if language=="English":
+        return "eng"
+    elif language=="Spanish":
+        return "spa"
+    elif language=="Tagalog":
+        return "tag"
+    elif language=="Mandarin":
+        return "man"
+    elif language=="Cantonese":
+        return "can"
+
 
 def aws_upload(file_key: str, file_to_upload: str, language: str):
     """Uploads a file to an AWS bucket.
