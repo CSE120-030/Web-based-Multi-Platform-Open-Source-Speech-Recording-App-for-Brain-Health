@@ -20,7 +20,8 @@ def home():
     if request.method=="GET":
         return render_template("homePage.html")
 
-@app.route('/authentication')
+
+@app.route('/signUp')
 def load():
     if current_user.is_authenticated:
         if current_user.is_patient():
