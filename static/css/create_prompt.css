@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+:root{
+    --main-background-color:#EBE7E0;
+    --primary-blue-color:#165EA0;
+    --secondary-background-color: white;
+    --text-font-family: 'Open Sans Light', sans-serif;
+    --body-text-color: #1A1B41;
+}
+ 
+.prompt-page{
+    display:flex;
+    padding-top: 65px;
+    background-color: var(--main-background-color);
+    
+}  
+.prompt-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 40px;
+    
+}
+.prompt-item-card .details{
+    position: relative;
+    top: 50px;
+    transition: 2s ease;
+    visibility: hidden;
+    opacity: 0;
+    
+}
+.prompt-contents{
+    font-family: var(--text-font-family);
+    color: var(--body-text-color);
+    background-color: var(--secondary-background-color);
+    border-radius: 15px;
+    border-style: none;
+    max-width: 500px;
+    margin: 0.5em auto;
+    padding: 1rem;
+    
+}
+.text_description{
+    font-family: var(--text-font-family);
+    color: var(--body-text-color);
+} 
