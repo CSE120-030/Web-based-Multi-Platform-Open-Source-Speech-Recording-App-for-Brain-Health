@@ -53,7 +53,7 @@ class ExpertMenu extends HTMLElement{
     connectedCallback(){
         this.innerHTML=`
         <head>
-            <link href="../static/css/expertMenu.css" rel="stylesheet" type="text/css">
+            <link href="/static/css/expertMenu.css" rel="stylesheet" type="text/css">
         </head?>
         <div class="menubar">
             <div class="menubar-wrapper"> 
