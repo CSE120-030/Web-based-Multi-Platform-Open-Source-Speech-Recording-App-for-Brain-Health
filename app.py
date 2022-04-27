@@ -19,8 +19,11 @@ def load_user(user_id):
 def welcome():
     return render_template("homePage.html")
 
+@app.route('/terms/')
+def terms():
+    return render_template("terms.html")
 
-@app.route('/welcome/')
+@app.route('/terms/')
 def load():
     if current_user.is_authenticated:
         if current_user.is_patient():
