@@ -1,5 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='PatientLogin.css')}}">
+</head>
+  <body>
+
+         <header id="PatientLClass">
+        <h1>Patient Login</h1>
+        <!--  {/* <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> */} -->
+        </header>
+         <div id="form-group1">
+             <label>User name</label>
+             <input type="text" class="form-control" placeholder="User Name" id="username"/>
+         </div>
+         <div id="form-group2">
+             <label>Password</label>
+             <input type="password" class="form-control" placeholder="Enter password" id="password" />
+         </div>
+         <div id="form-group3">
+             <div class="custom-control custom-checkbox">
+                 <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                 <label class="custom-control-label" htmlFor="customCheck1">Remember me</label>
+             </div>
+         </div>
+         <button id="logIn" type="submitPatientButton" class="submitPatientButton" id="submitButton" onclick="logIn()">Submit</button>
+         <div class="forgot-password">
+             Forgot <a href="#">password?</a>
+         </div>
+
+         <a href="/AdminLogin">
+            <button type="rightCornerButtonAdmin" class="rightCornerButtonAdmin">Admin Login</button>
+         </a>
+<script type="text/javascript" src="{{url_for('static', filename='loginJS.js')}}"> </script>
+
+     </body>
+
+<!--
     <head>
         <meta charset="UTF-8">
         <title>UCSF Speech App</title>
@@ -23,4 +62,5 @@
         <script type="text/javascript" src="{{url_for('static', filename='loginJS.js')}}"> </script>
 
     </body>
+-->
 </html>
