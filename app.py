@@ -98,13 +98,6 @@ def login():
 
     return redirect(url_for('load'))
 
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect("/")
-
-
 @app.route('/expertPortal/', methods=['POST','GET'])
 @login_required
 def expertPortal():
