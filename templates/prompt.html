@@ -3,11 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+<script>
+
+
+
+           function lload_next_prompt()
+           {
+               var current_value = JSON.parse(sessionStorage.getItem('control'));
+               current_value +=1;
+               sessionStorage.setItem('control', JSON.stringify(current_value));
+
+
+
+           }
+
+
+</script>
+    <script>
+
+        function load_next_prompt() {
+
+            sessionStorage.setItem('control', JSON.stringify(control));
+            var current_value = JSON.parse(sessionStorage.getItem('control'));
+            if (current_value < PREDEFINED_PROMPTS) {
+
+
+                const xhttp = new XMLHttpRequest();
+                const method = "GET";
+                const async = true;
+                const url = window.location.href+current_value;
+                console.log(url)
+                xhttp.open(method, url, async);
+                xhttp.onload = function () {
+
+                }
+
+                xhttp.send()
+                control++;
+                localStorage.setItem('control', JSON.stringify(control));
+                console.log(control);
+
+            } else {
+                console.log("Control variable wont be updated")
+            }
+        }
+    </script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body>
 <h1>Promp Page</h1>
-<textarea></textarea>
-<img src="">
+<h3>Prompt Description:</h3>
+{% for i in specific_prompt %}<p>{{ i.description}}</p>
+
+{% endfor %}
+
+<br>
+<img src="" id="myimg"/>
+<button onclick="lload_next_prompt()"><a href="{{url_for('load_prompts')}}">Next prompt</a></button>
+<br>
+ <div class="wrapper">
+
+      <header>
+      </header>
+
+      <section class="main-controls">
+        <canvas class="visualizer" height="60px"></canvas>
+        <div id="buttons">
+          <button class="record">Record</button>
+          <button class="stop">Stop</button>
+        </div>
+      </section>
+
+      <section class="sound-clips">
+
+
+      </section>
+
+    </div>
+
+<a href="{{url_for('load_prompts')}}">
+
+<script type="text/javascript" src="{{url_for('static', filename='promptJS.js')}}"> </script>
+<script type="text/javascript" src="{{url_for('static', filename='mediaJS.js')}}"> </script>
 
 </body>
+  <script>
+
+    $(document).ready(function() {
+           $.ajax({
+           url: "{{url_for('get_image')}}",
+           type: "GET",
+           success: function(response) {
+
+               $("#myimg").attr('src', '/static/' + response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+         }
+         });
+
+    });
+  </script>
 </html>
