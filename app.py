@@ -19,7 +19,7 @@ def load_user(user_id):
 def welcome():
     return render_template("homePage.html")
 
-@app.route('/terms/')
+@app.route('/terms/', methods=['GET'])
 def terms():
     return render_template("terms.html")
 
@@ -32,7 +32,7 @@ def load():
             return redirect(url_for("expertPortal",expert_name=current_user.get_name()))
     return render_template("signUp.html")
 
-@app.route('/welcome/login', methods=['POST', 'GET'])
+@app.route('/terms/login', methods=['POST', 'GET'])
 def login():
     # User already authenticated - serve appropriate portal page
     if current_user.is_authenticated:
