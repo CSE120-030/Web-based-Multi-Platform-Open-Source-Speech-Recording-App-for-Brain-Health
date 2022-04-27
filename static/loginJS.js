@@ -6,7 +6,7 @@ function logIn()
     const xhttp = new XMLHttpRequest();
 	const method = "POST";
 	const async = true;
-	const url = window.location.href + "/login";
+	const url = window.location.href + "login";
     xhttp.open(method, url, async);
 	xhttp.setRequestHeader("Content-Type", "application/json");
 
