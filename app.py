@@ -98,6 +98,13 @@ def login():
 
     return redirect(url_for('load'))
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
+
+
 @app.route('/expertPortal/', methods=['POST','GET'])
 @login_required
 def expertPortal():
@@ -180,8 +187,6 @@ def get_image():
         print("in get image")
         print(image_name)
         return image_name
-
-
 
 @app.route('/media', methods=['POST', 'GET'])
 def media():
