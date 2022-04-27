@@ -53,7 +53,7 @@ def load_user(user_id):
 
 	return get_user_by_id(user_id)
 
-@app.route('/')
+@app.route('/welcome/')
 def load():
     print("in load function")
     if current_user.is_authenticated:
@@ -67,7 +67,12 @@ def load():
 
     return render_template("signUp.html")
 
-@app.route('/login', methods=['POST', 'GET'])
+
+@app.route('/',methods = ['GET'])
+def welcome():
+    return render_template('homePage.html')
+
+@app.route('/welcome/login', methods=['POST', 'GET'])
 def login():
     print("in login function")
     # User already authenticated - serve appropriate portal page
@@ -132,6 +137,8 @@ def patientPortal():
 @login_required
 def do_prompts(prompt_id):
     print("we got prompt id:",prompt_id)
+    if int(prompt_id)==4:
+        return redirect(url_for('thank_you'))
     if request.method=="GET":
         #print("get method")
         #print(get_prompt_from_list(1))
@@ -155,11 +162,12 @@ def do_prompts(prompt_id):
         except:
             print("An error happened")
             return redirect(url_for("do_prompts", prompt_id=prompt_id))
-
-
     if request.method=="POST":
         return render_template("prompt.html", media_sent=get_media(request.files['audio_data']))
 
+@app.route('/thank_you/',methods = ['GET'])
+def thank_you():
+    return render_template("thank_you.html")
 
 @app.route("/load_promp",methods=["GET"])
 def load_prompts():
@@ -169,7 +177,12 @@ def load_prompts():
     #asg_obj.set_asg_counter(control_asg)
     #print("asg id: ", control_asg)
     global prompt_counter
+
+
+
+    print("global counter b4:", prompt_counter)
     prompt_counter+=1
+    print("global counter after:", prompt_counter)
     return redirect(url_for("do_prompts",prompt_id=prompt_counter))
 
 
@@ -204,47 +217,6 @@ def createPrompt():
         print(request.json)
         return render_template("create_prompt.html", promptCreation=prompt_creation(request.json))
 
-@app.route('/expertPortal/download_prompt/<prompt_name>/', methods=['GET','POST'])
-@login_required
-def get_prompt(prompt_name):
-    global prompt_counter_aws
-    if request.method=='GET':
-        print(prompt_name)
-        if prompt_name=="Spontaneous":
-
-            prompt_counter_aws=0
-            print(prompt_counter_aws)
-            name_file_dowload = get_file_name_expert()
-            print("audio to download:" + name_file_dowload[int(prompt_counter_aws)])
-            print(name_file_dowload[int(prompt_counter_aws)])
-            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
-            return redirect(file,code=302)
-
-        elif prompt_name=="Semi-spontaneous":
-
-            prompt_counter_aws=1
-            print(prompt_counter_aws)
-            name_file_dowload = get_file_name_expert()
-            print("audio to download:"+name_file_dowload[int(prompt_counter_aws)])
-            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
-            return redirect(file,code=302)
-
-        elif prompt_name=="Non-spontaneous":
-
-            prompt_counter_aws=2
-            print(prompt_counter_aws)
-            name_file_dowload = get_file_name_expert()
-            print(name_file_dowload[int(prompt_counter_aws)])
-            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
-            return redirect(file,code=302)
-
-        elif prompt_name== "Another_type_of_prompt":
-            prompt_counter_aws=3
-            print(prompt_counter_aws)
-            name_file_dowload = get_file_name_expert()
-            print(name_file_dowload[int(prompt_counter_aws)])
-            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
-            return redirect(file,code=302)
 
 
 @app.route('/expertPortal/download_prompt/<prompt_name>/<language>/<prompt_id>/<first_name>/<last_name>/<patient_id>', methods=['GET','POST'])
