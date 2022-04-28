@@ -13,4 +13,5 @@
 }
 .other-items{
     background-color: var(--text-font-family);
+    margin-left: 50px;
 }
