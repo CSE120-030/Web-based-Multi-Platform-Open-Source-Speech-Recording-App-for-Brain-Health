@@ -16,38 +16,47 @@
         <app-navbar></app-navbar>
         <div class="prompt-page">
             <expert-menu></expert-menu>
-            <div class="prompt-container">
-                <div class="prompt-item">
-                    <h1>Prompt creation</h1> 
+            <div class="prompt-card">
+                <h1>Create Prompt</h1> 
+
+                <div class="prompt-header">
                     <h3>Prompt Description: </h3>
                     <!--<textarea rows="10" cols="100" placeholder="Enter Prompt Description" id="text_description"></textarea>-->
-                    <textarea name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' placeholder="Enter Prompt Description" id="text_description"></textarea>
-                </div> 
-                <div class="prompt-item">
-                    <h3>Type of Prompt: </h3>
-                    <select name="Type_of_Prompt" id="type_of_prompt">
-                        {% for item in top %}
-                        <option value="{{item.type_of_prompt}}">{{item.prompt_name}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="prompt-container">
+                        <textarea name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' placeholder="Enter Prompt Description" id="text_description"></textarea>
+                    </div>     
+                </div>         
+                <div class="prompt-header">
+                    <h3>Type of Prompt: </h3> 
+                    <div class="prompt-container">
+                        <select name="Type_of_Prompt" id="type_of_prompt">
+                            {% for item in top %}
+                            <option value="{{item.type_of_prompt}}">{{item.prompt_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
-                <div class="prompt-item">
+                <div class="prompt-header">
                     <h3>Language: </h3>
-                    <select name="Language_selection" id="type_of_language">
-                        {% for i in languages %}
-                        <option value="{{i.language_id}}">{{i.name}}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="prompt-container">
+                        <select name="Language_selection" id="type_of_language">
+                            {% for i in languages %}
+                            <option value="{{i.language_id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>   
-                <div class="prompt-item">
+                <div class="prompt-header">
                     <h3 for="image">Choose a image for prompt:</h3>
-                    <input type="file"
-                        id="imageSelected" name="image"
-                        accept="image/png, image/jpeg">
-                    <input type="button" value="Submit" onclick="checkForm()">
+                    <div class="prompt-container">
+                        <input type="file"
+                            id="imageSelected" name="image"
+                            accept="image/png, image/jpeg">
+                        <input type="button" value="Submit" onclick="checkForm()">
+                    </div>
                 </div> 
-            </div>         
-        </div>
+            </div>
+        </div>    
         
         <script type="text/javascript" src="{{url_for('static', filename='createPromptJS.js')}}"> </script>
         <script src="/static/component.js"></script>
