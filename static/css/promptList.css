@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+:root{
+    --main-background-color:#EBE7E0;
+    --primary-blue-color:#165EA0;
+    --text-font-family: 'Open Sans Light', sans-serif;
+    --body-text-color: #1A1B41;
+}
+
+.prompt-list-items{
+    font-family: var(--text-font-family);
+    color: var(--body-text-color);
+    width:100%;
+}
+
+.tabcontent{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.tabcontent th {
+    background-color: var(--body-text-color);
+    color: white;
+    text-align: center;
+    padding: 12px 15px;
+}
+.tabcontent td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+
+.download_prompt{
+    box-shadow: none;
+    font-size: 14px;
+    font-family: var(--text-font-family);
+    padding: 10px 15px 10px 15px;
+    background-color: var(--body-text-color);
+    color: white;
+    border:none;
+    border-radius:30px; 
+}

@@ -1,54 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<!--
-<head>
-    <meta charset="UTF-8">
-    <title>Expert Portal</title>
-</head>
-<body>
-<h1>Expert Portal</h1>
-<aside><h3>Create Prompt</h3>
-    <a href="{{ url_for('createPrompt') }}">Create Prompt</a><br><br>
-    <a href="{{ url_for('registration') }}">Register a new patient</a><br><br>
-
-    <div id="yourCourses" class="tabcontent">
-            <table>
-                <tr>
-                  <th>Type of Prompt</th>
-                  <th>Language</th>
-                  <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Patient Id</th>
-                    <th>Prompt Id</th>
-                    <th>Download</th>
-
-
-
-                </tr>
-
-                {% for i in table %}
-					<tr>
-                        <td class="group_name">{{ i.type_of_prompt}}</td>
-		                <td >{{ i.language}}</td>
-                        <td >{{ i.first_name }}</td>
-                    <td >{{ i.last_name }}</td>
-                    <td >{{ i.patient_id }}</td>
-                    <td >{{ i.prompt_id }}</td>
-                        <td><button class="download_prompt" onclick="download(this)"><a href="{{url_for('get_prompt2',prompt_name=i.type_of_prompt,language = i.language,prompt_id= i.prompt_id, first_name=i.first_name,last_name=i.last_name,patient_id=i.patient_id)}}">Download</a></button></td>
-                </tr>
-				{% endfor %}
-
-              </table>
-
-        </div>
-
-
-
-</aside>
-</body>
-</html>
--->
     <head>
         <meta charset="UTF-8">
         <title>Expert Portal</title>
@@ -59,16 +11,18 @@
         <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src= "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <link href="../static/css/expertMenu.css" rel="stylesheet" type="text/css">
        
     </head>
     <body>
         <app-navbar></app-navbar>
         <div class="menu-container">
+            <expert-menu></expert-menu>
             <!--<h1>Expert Portal</h1> -->
-            <aside><h3>Create Prompt</h3>
-            <a href="{{ url_for('createPrompt') }}">Create Prompt</a></aside>
-        </div>
+            <div class="other-items">
+                <h3>Welcome to the Admin Portal</h3>
+            </div>
+        </div> 
+
         <script src="../static/component.js"></script>
     </body>
 </html> 
