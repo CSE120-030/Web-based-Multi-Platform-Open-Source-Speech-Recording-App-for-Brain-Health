@@ -105,6 +105,7 @@ def expertPortal():
         return render_template("expertPortal.html",prompts = get_file_name_expert(), table= info_expert_portal())
 
 
+
 @app.route('/patientPortal/', methods=['POST', 'GET'])
 @login_required
 def patientPortal():
@@ -202,6 +203,12 @@ def createPrompt():
         print(request.json)
         return render_template("create_prompt.html", promptCreation=prompt_creation(request.json))
 
+@app.route('/promptList/', methods=['POST', 'GET'])
+@login_required
+def promptList():
+    if request.method=="GET":
+        return render_template("promptList.html", prompts = get_file_name_expert(), table= info_expert_portal())
+    
 @app.route('/expertPortal/download_prompt/<prompt_name>/', methods=['GET','POST'])
 @login_required
 def get_prompt(prompt_name):
