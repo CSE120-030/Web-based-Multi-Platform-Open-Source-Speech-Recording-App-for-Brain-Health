@@ -16,35 +16,3 @@
     background-color: var(--text-font-family);
     margin-left: 50px;
 } 
-
-.tabcontent{
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    padding:10px;
-}
-.tabcontent th {
-    background-color: var(--body-text-color);
-    color: white;
-    text-align: center;
-    padding: 12px 15px;
-}
-.tabcontent td {
-    padding: 12px 15px;
-    text-align: center;
-}
-
-
-.start_asg{
-    box-shadow: none;
-    font-size: 14px;
-    font-family: var(--text-font-family);
-    padding: 10px 15px 10px 15px;
-    background-color: var(--body-text-color);
-    color: white;
-    border:none;
-    border-radius:30px; 
-}
