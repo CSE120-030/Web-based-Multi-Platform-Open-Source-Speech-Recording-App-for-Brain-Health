@@ -12,42 +12,13 @@
           <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         
   </head>
-  <script>
-        var control=-1;
-      sessionStorage.setItem('control',JSON.stringify(control));
-      console.log(control);
-
-  </script>
   <body>
     <app-navbar></app-navbar>
     <div class="menu-container">
       <patient-menu></patient-menu>
       <div class="other-items">
-        <div id="yourCourses" class="tabcontent">
-          <h1>Patient Assignments</h1>
-          <table>
-            <tr>
-              <th>Assignment</th>
-              <th>Deadline</th>
-              <th>Status</th>
-              <th>Start</th>
-            </tr>
-            {% for i in your_assignments %}
-            <tr>
-                <td class="group_name">{{ i.group_name}}</td>
-                <td>{{ i.date_of_assignment}}</td>
-                <td>{{ i.state_of_prompt }}</td>
-                <td>
-                  <button class="start_asg" onclick="startAsg(this)"><a href="{{url_for('do_prompts',prompt_id=0)}}" style="text-decoration:none;">Start</a></button>
-                </td>
-              </tr>
-            {% endfor %}
-          </table>
-  
-        </div> 
-      </div>
+        <h1>Welcome to the Patient Portal!</h1>
       
-      <script type="text/javascript" src="{{url_for('static', filename='assingmentJS.js')}}"> </script>
       <script src="../static/component.js"></script>
     </div>
   </body>
