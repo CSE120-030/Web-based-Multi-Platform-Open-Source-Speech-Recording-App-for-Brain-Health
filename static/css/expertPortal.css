@@ -3,9 +3,12 @@
 :root{
     --main-background-color:#EBE7E0;
     --primary-blue-color:#165EA0;
+    --secondary-background-color: white;
     --text-font-family: 'Open Sans Light', sans-serif;
-    --body-text-color: #1A1B41;
+    --body-text-color: #1A1B41; 
+    --border-box-shadow:#e7e7e7;
 }
+
 
 .menu-container{
     display:flex;
