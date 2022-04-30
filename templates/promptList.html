@@ -46,7 +46,7 @@
                                 <td >{{ i.patient_id }}</td>
                                 <td >{{ i.prompt_id }}</td>
                                 <td>
-                                    <button class="download_prompt" onclick="download(this)"><a href="{{url_for('get_prompt2',prompt_name=i.type_of_prompt,language = i.language,prompt_id= i.prompt_id, first_name=i.first_name,last_name=i.last_name,patient_id=i.patient_id)}}" style="text-decoration:none;">Download</a></button>
+                                    <button class="download_prompt" onclick="download(this)"><a href="{{url_for('get_prompt2',prompt_name=i.type_of_prompt,language = i.language,prompt_id= i.prompt_id, first_name=i.first_name,last_name=i.last_name,patient_id=i.patient_id)}}" style="color: white; text-decoration:none;">Download</a></button>
                                 </td>
                             </tr>
                             {% endfor %}
