@@ -35,7 +35,7 @@ if (navigator.mediaDevices.getUserMedia) {
                     mediaRecorder.start();
                     console.log(mediaRecorder.state);
                     console.log("recorder started");
-                    record.style.background = "red";
+                    record.style.background = "#568259";
 
                     stop.disabled = false;
                     record.disabled = true;
@@ -56,8 +56,8 @@ if (navigator.mediaDevices.getUserMedia) {
       mediaRecorder.stop();
       console.log(mediaRecorder.state);
       console.log("recorder stopped");
-      record.style.background = "";
-      record.style.color = "";
+      record.style.background = "#DD1155";
+     //record.style.color = "";
       // mediaRecorder.requestData();
 
       stop.disabled = true;
