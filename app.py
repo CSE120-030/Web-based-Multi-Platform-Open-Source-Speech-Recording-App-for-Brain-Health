@@ -15,7 +15,11 @@ app.secret_key = 'keep it secret, keep it safe' # Add this to avoid an error
 def load_user(user_id):
 	return get_user_by_id(user_id)
 
-@app.route('/')
+@app.route('/', methods=['GET'])
+def welcome():
+    return render_template("homePage.html")
+
+@app.route('/welcome/')
 def load():
     if current_user.is_authenticated:
         if current_user.is_patient():
@@ -24,7 +28,7 @@ def load():
             return redirect(url_for("expertPortal",expert_name=current_user.get_name()))
     return render_template("signUp.html")
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/welcome/login', methods=['POST', 'GET'])
 def login():
     # User already authenticated - serve appropriate portal page
     if current_user.is_authenticated:
