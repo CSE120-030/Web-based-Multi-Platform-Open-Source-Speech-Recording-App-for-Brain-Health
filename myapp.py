@@ -2,6 +2,7 @@ from flask import Flask
 import os
 
 app = Flask(__name__)
+
 #app.config['UPLOAD_FOLDER'] = MEDIA_FOLDER
 app.config['SECRET_KEY']=  'this is the key'
 app.config['SECURITY_PASSWORD_SALT'] = 'my_precious_two'

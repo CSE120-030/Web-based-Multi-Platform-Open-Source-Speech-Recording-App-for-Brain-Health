@@ -151,6 +151,70 @@ def get_assignments():
         return dict_to_return
 
 
+def mark_asg_as_completed():
+
+
+
+    return ""
+
+
+def create_asg_dynamically(req):
+    name = req["asg_name"]
+    prompts = req["prompts"]
+
+    # create asg name
+    create_group_of_prompt(name=name)
+
+
+    #create a list group
+    # for each prompt
+    for i in prompts: # get 1,2,3,4 -> prompts id
+       add_prompt_to_group(name,int(i))
+
+    return ""
+
+def list_patients_info():
+    dict_to_return = []
+    patients = db.session.query(Patient,Patient.patientId,Patient.firstName,Patient.lastName,Language.name,Patient.sex,Patient.dob,GroupOfPrompt.name,Assignment.dateOfAssignment).join(Language,Language.languageId==Patient.languageId).join(Assignment,Assignment.patientId==Patient.patientId).join(GroupOfPrompt,GroupOfPrompt.groupOfPromptId==Assignment.groupOfPromptsId).join(Expert,Expert.expertId==Patient.expertId).join(User,User.userId==Expert.userId).filter(User.userId==get_patient_id()).all()
+    print(patients)
+    for i in patients:
+        info = {'patient_id':i[1],'first_name':i[2],'last_name':i[3],'language':i[4],'sex':i[5],'dob':i[6],'group_name':i[7],'asg_date':i[8]}
+        dict_to_return.append(info)
+    print(dict_to_return)
+    return dict_to_return
+
+def change_asg_to_patient(new_info):
+    #patient = db.session.query(Patient).join(Assignment,Assignment.patientId==Patient.patientId).join(User,User.userId==Patient.userId).filter(Assignment.patientId==new_info['patient_id']).first()
+    #print(patient.userId) # we get the id
+
+    asg = db.session.query(Assignment).filter(Assignment.patientId==new_info['patient_id']).first()
+    asg.groupOfPromptsId = new_info['group_id']
+    db.session.commit()
+    return "Successfully updated records"
+
+def list_prompts():
+    dict_to_return = []
+
+    prompts = db.session.query(Prompt,Prompt.promptId,Prompt.descriptionPrompt,Language.name,Image.name,TypeOfPrompt.name).join(Language,Language.languageId==Prompt.languageId).join(Image,Image.imageId==Prompt.imageId).join(TypeOfPrompt,TypeOfPrompt.typeOfPromptId==Prompt.typeOfPromptId).join(Expert,Expert.expertId==Prompt.expertId).join(User,User.userId==Expert.userId).filter(User.userId==get_patient_id()).all()
+    print(prompts)
+    for i in prompts:
+        info = {'promptId':i[1],'descriptionPrompt':i[2],'language':i[3],'image':i[4],'type_prompt':i[5]}
+        dict_to_return.append(info)
+    print(dict_to_return)
+
+    return dict_to_return
+
+def get_asg():
+    dict_to_return=[]
+    group_name = db.session.query(GroupOfPrompt).all()
+    for i in group_name:
+        #print(i)
+        info = {'group_id':i.groupOfPromptId,'group_name':i.name}
+        dict_to_return.append(info)
+    print(dict_to_return)
+    return dict_to_return
+
+
 # static for same expert. Assume expert one
 def add_assignemnt_static(): # for time being, assume all assingments are of the group general
     patient = get_patient_id()

@@ -60,7 +60,7 @@
 
 <br>
 <img src="" id="myimg"/>
-<button onclick="lload_next_prompt()"><a href="{{url_for('load_prompts')}}">Next prompt</a></button>
+<button id="next_prompt" onclick="lload_next_prompt()"><a href="{{url_for('load_prompts')}}">Next prompt</a></button>
 <br>
  <div class="wrapper">
 
@@ -95,8 +95,14 @@
            url: "{{url_for('get_image')}}",
            type: "GET",
            success: function(response) {
-
-               $("#myimg").attr('src', '/static/' + response);
+               console.log(response)
+                if(response=="nothing")
+                {
+                    $("#myimg").remove();
+                }
+                else {
+                    $("#myimg").attr('src', '/static/' + response);
+                }
           },
           error: function(xhr) {
             //Do Something to handle error
