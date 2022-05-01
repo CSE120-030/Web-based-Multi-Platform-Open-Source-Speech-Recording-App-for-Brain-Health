@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+:root{
+    --main-background-color:#EBE7E0;
+    --primary-blue-color:#165EA0;
+    --secondary-background-color: white;
+    --text-font-family: 'Open Sans Light', sans-serif;
+    --body-text-color: #1A1B41; 
+    --border-box-shadow:#e7e7e7;
+}
+
+.menu-container{
+    display:flex;
+    padding-top: 65px;
+    padding-left: 25px; 
+} 
+.next-prompt-button{
+    box-shadow: none;
+    font-size: 14px;
+    font-family: var(--text-font-family);
+    padding: 10px 15px 10px 15px;
+    background-color: var(--body-text-color);
+    color: white;
+    border:none;
+    border-radius:30px; 
+} 
+.recording-page{
+    margin:auto; 
+    background-color:var(--secondary-background-color);
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    padding-top: 65px;
+}
+.recording-card{
+    border: thin solid var(--border-box-shadow); 
+    border-radius: 15px;
+    padding: 1.0rem;
+    background-color: var(--secondary-background-color); 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); 
+    text-align: center;  
+    font-size:42px;
+    background-color: var(--secondary-background-color);
+    font-family: var(--text-font-family);
+}
+.recording-header{
+    height: 30%;
+    background-color: var(--secondary-background-color);
+    font-family: var(--text-font-family);
+    color: var(--body-text-color);
+    padding-top:25px;
+    text-align: center;
+    font-size:18px; 
+    border-radius:15px;
+}
+
+.recording-container{
+    padding: 2px 16px 10px;
+    font-size:14px;
+    background-color: var(--secondary-background-color);
+    font-family: var(--text-font-family);
+} 
+.record{
+    
+}

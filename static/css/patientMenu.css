@@ -1,0 +1,56 @@
+:root{
+    --main-background-color:#EBE7E0;
+    --primary-blue-color:#165EA0;
+    --secondary-background-color: white;
+    --text-font-family: 'Open Sans Light', sans-serif;
+    --body-text-color: #1A1B41; 
+    --border-box-shadow:#e7e7e7;
+    --menu-text: #cccccb;
+}
+.menubar{
+    flex:1;
+    height: calc(100vh - 50px);
+    background-color:white;
+    position:sticky;
+    top:50px; 
+} 
+.menubar-wrapper{
+    padding:20px;
+    color:#555;
+} 
+.menubar-box{
+    margin-bottom:10px;
+} 
+.menu-title{
+    font-size:14px;
+    color: var(--menu-title);
+} 
+.menu-list{
+    list-style:none;
+    padding:5px;
+}
+.menu-list-item{
+    display:flex;
+    align-items:center;
+    font-size:16px;
+    padding: 5px;
+    cursor:pointer;
+    border-radius:5px;
+    color:black;
+    vertical-align: middle;
+} 
+.menu-list-item:hover{
+    background-color: var(--menu-text);
+    opacity: 80%;
+} 
+.menu-icon{
+    margin: 0 0.5em 0 0;
+    
+} 
+.icon-titles{
+    margin: 0.5em 0 0.5em 0.5em;
+    font-size: 16px;
+    font-family: var(--text-font-family);
+    color: var(--body-text-color);
+    
+}
