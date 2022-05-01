@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-#!/Users/joceychan/Web-based-Multi-Platform-Open-Source-Speech-Recording-App-for-Brain-Health/venv/bin/python3
-=======
-#!/Users/benita/Documents/GitHub/Web-based-Multi-Platform-Open-Source-Speech-Recording-App-for-Brain-Health/venv/bin/python3
->>>>>>> 2646ade36c08f98d34a981595dd7bc3ec740dfcb
 # -*- coding: utf-8 -*-
 import re
 import sys
