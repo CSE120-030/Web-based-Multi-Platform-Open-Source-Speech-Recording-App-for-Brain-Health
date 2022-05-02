@@ -41,6 +41,71 @@
         }
       }
     </script>
+<!--
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+<h1>Promp Page</h1>
+<h3>Prompt Description:</h3>
+{% for i in specific_prompt %}<p>{{ i.description}}</p>
+
+{% endfor %}
+
+<br>
+<img src="" id="myimg"/>
+<button id="next_prompt" onclick="lload_next_prompt()"><a href="{{url_for('load_prompts')}}">Next prompt</a></button>
+<br>
+ <div class="wrapper">
+
+      <header>
+      </header>
+
+      <section class="main-controls">
+        <canvas class="visualizer" height="60px"></canvas>
+        <div id="buttons">
+          <button class="record">Record</button>
+          <button class="stop">Stop</button>
+        </div>
+      </section>
+
+      <section class="sound-clips">
+
+
+      </section>
+
+    </div>
+
+<a href="{{url_for('load_prompts')}}">
+
+<script type="text/javascript" src="{{url_for('static', filename='promptJS.js')}}"> </script>
+<script type="text/javascript" src="{{url_for('static', filename='mediaJS.js')}}"> </script>
+
+</body>
+  <script>
+
+    $(document).ready(function() {
+           $.ajax({
+           url: "{{url_for('get_image')}}",
+           type: "GET",
+           success: function(response) {
+               console.log(response)
+                if(response=="nothing")
+                {
+                    $("#myimg").remove();
+                }
+                else {
+                    $("#myimg").attr('src', '/static/' + response);
+                }
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+         }
+         });
+
+    });
+  </script>
+-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   </head>
 

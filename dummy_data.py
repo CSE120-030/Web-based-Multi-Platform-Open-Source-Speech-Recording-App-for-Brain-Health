@@ -26,7 +26,9 @@ expert=1
 #create_image("number_seven",'./Images/seven.png')
 #create_image("blank",'./Images/blank.jpg')
 #create_image("test",'./Images/test.jpg')
-
+#create_image("descriptive",'./Images/descriptive.jpg')
+#create_image("nothing",'./Images/nothing')
+#create_image("among.png",'./Images/among.png')
 #create type_prompt() # the description can be changed later
 #create_type_of_prompt("Spontaneous","Spontaneous prompt")
 #create_type_of_prompt("Semi-spontaneous","Semi-spontaneous prompt")

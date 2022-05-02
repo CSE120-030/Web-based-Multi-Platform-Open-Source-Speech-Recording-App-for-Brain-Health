@@ -53,7 +53,11 @@ def load_user(user_id):
 
 	return get_user_by_id(user_id)
 
-@app.route('/')
+@app.route('/terms/', methods=['GET'])
+def terms():
+    return render_template("terms.html")
+
+@app.route('/welcome/')
 def load():
     print("in load function")
     if current_user.is_authenticated:
@@ -67,7 +71,12 @@ def load():
 
     return render_template("signUp.html")
 
-@app.route('/login', methods=['POST', 'GET'])
+
+@app.route('/',methods = ['GET'])
+def welcome():
+    return render_template('homePage.html')
+
+@app.route('/welcome/login', methods=['POST', 'GET'])
 def login():
     print("in login function")
     # User already authenticated - serve appropriate portal page
@@ -156,6 +165,8 @@ def patientPortal():
 @login_required
 def do_prompts(prompt_id):
     print("we got prompt id:",prompt_id)
+    if int(prompt_id)==4:
+        return redirect(url_for('thank_you'))
     if request.method=="GET":
         #print("get method")
         #print(get_prompt_from_list(1))
@@ -179,11 +190,12 @@ def do_prompts(prompt_id):
         except:
             print("An error happened")
             return redirect(url_for("do_prompts", prompt_id=prompt_id))
-
-
     if request.method=="POST":
         return render_template("prompt.html", media_sent=get_media(request.files['audio_data']))
 
+@app.route('/thank_you/',methods = ['GET'])
+def thank_you():
+    return render_template("thank_you.html")
 
 @app.route("/load_promp",methods=["GET"])
 def load_prompts():
@@ -193,7 +205,12 @@ def load_prompts():
     #asg_obj.set_asg_counter(control_asg)
     #print("asg id: ", control_asg)
     global prompt_counter
+
+
+
+    print("global counter b4:", prompt_counter)
     prompt_counter+=1
+    print("global counter after:", prompt_counter)
     return redirect(url_for("do_prompts",prompt_id=prompt_counter))
 
 
@@ -343,6 +360,25 @@ def resend_confirmation():
     send_email(patient.e, subject, html)
     return redirect(url_for('unconfirmed'))
 
+@app.route('/expertPortal/create_asg',methods=['GET','POST'])
+@login_required
+def create_asg():
+    if request.method=="GET":
+        return render_template('create_asg.html', list_prompts = list_prompts())
+    if request.method=="POST":
+        print(request.json)
+        return render_template('create_asg.html',list_prompts = list_prompts(), asg_created= create_asg_dynamically(request.json))
+
+@app.route('/expertPortal/list_patients',methods=['GET','PUT'])
+@login_required
+def list_patients():
+    if request.method=="GET":
+
+        return render_template('patients_info.html',list_patient=list_patients_info(), get_asg=get_asg())
+
+    if request.method=="PUT": # assign a test to patient
+        print(request.json)
+        return render_template('patients_info.html',new_asg=change_asg_to_patient(request.json))
 
 @app.after_request
 def after_request(response):

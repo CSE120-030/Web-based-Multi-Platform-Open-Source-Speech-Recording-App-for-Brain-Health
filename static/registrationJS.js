@@ -13,7 +13,7 @@ function sendData()
     var sex = document.getElementById("sex").value;
 
     console.log(fist_name,last_name,type_of_language,email,username,password,dob,sex);
-    const xhttp = new XMLHttpRequest();
+        const xhttp = new XMLHttpRequest();
      const method = "POST";
      const async = true;
      const url = window.location.href;

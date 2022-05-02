@@ -110,7 +110,7 @@ def add_prompt_to_group(groupName,prompt):
     group = db.session.query(GroupOfPrompt).filter(GroupOfPrompt.name==groupName).first()
     # get the prompt
     prompt = db.session.query(Prompt).filter(Prompt.promptId==prompt).first()
-    last_id = get_list_group_id()
+    last_id = get_list_group_id() # get last id from list_group table
     list_group = ListGroup()
     list_group.listGroupId= last_id+1
     list_group.groupOfPromptId=group.groupOfPromptId
