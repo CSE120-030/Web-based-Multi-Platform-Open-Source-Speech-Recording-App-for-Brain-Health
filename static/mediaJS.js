@@ -87,7 +87,7 @@ if (navigator.mediaDevices.getUserMedia) {
       //} else {
         //clipLabel.textContent = "recording";
       //}
-        clipLabel.textContent="recording";
+      //clipLabel.textContent="recording";
       clipContainer.appendChild(audio);
       clipContainer.appendChild(clipLabel);
       clipContainer.appendChild(deleteButton);
@@ -197,6 +197,7 @@ function visualize(stream) {
 
     canvasCtx.lineWidth = 2;
     canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+    // canvasCtx.style.border-radius=15px;
 
     canvasCtx.beginPath();
 
