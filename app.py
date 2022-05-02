@@ -53,15 +53,9 @@ def load_user(user_id):
 
 	return get_user_by_id(user_id)
 
-<<<<<<< HEAD
-@app.route('/', methods=['GET'])
-def welcome():
-    return render_template("homePage.html")
-=======
 @app.route('/terms/', methods=['GET'])
 def terms():
     return render_template("terms.html")
->>>>>>> 67fd0e8c0bf96e28b3170706eb5f2c53bb9c6b40
 
 @app.route('/welcome/')
 def load():
@@ -77,14 +71,11 @@ def load():
 
     return render_template("signUp.html")
 
-<<<<<<< HEAD
-=======
 
 @app.route('/',methods = ['GET'])
 def welcome():
     return render_template('homePage.html')
 
->>>>>>> 67fd0e8c0bf96e28b3170706eb5f2c53bb9c6b40
 @app.route('/welcome/login', methods=['POST', 'GET'])
 def login():
     print("in login function")
