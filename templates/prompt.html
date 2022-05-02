@@ -57,6 +57,9 @@
               {% endfor %}
             </div>
             <img src="" id="myimg"/>
+          </div>
+        </div>
+        <div class="recording-card">  
             <div class="wrapper">
               <section class="main-controls">
                 <canvas class="visualizer"></canvas>
@@ -68,13 +71,12 @@
               </section>
               <section class="sound-clips"></section>
             </div>
-          </div>  
+            <a href="{{url_for('load_prompts')}}">
+           
+            <script type="text/javascript" src="{{url_for('static', filename='mediaJS.js')}}"> </script>
+            <script src="/static/component.js"></script> 
+          </div>
           
-          <a href="{{url_for('load_prompts')}}">
-         
-          <script type="text/javascript" src="{{url_for('static', filename='mediaJS.js')}}"> </script>
-          <script src="/static/component.js"></script> 
-        </div>
       </div>  
     </div> 
   </body>
