@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<label>Assignment name:</label>
-<input type="text" id="asg">
+  <head>
+      <meta charset="UTF-8">
+      <title>Group Assignments</title>
 
-
-<table id="promptInfo">
-                <tr>
-                  <th>Prompt Id</th>
-                  <th>Description for Prompt</th>
-                  <th>language</th>
-                    <th>Image Name</th>
-                    <th>Type of Prompt</th>
-                    <th>Select</th>
-                </tr>
-
-    {% for i in list_prompts %}
-					<tr>
-                        <td>{{ i.promptId }}</td>
-                        <td>{{ i.descriptionPrompt }}</td>
-                        <td>{{ i.language }}</td>
-                        <td>{{ i.image }}</td>
-                        <td>{{ i.type_prompt }}</td>
-
-                        <td><input type="checkbox" id="prompt"></td>
-                </tr>
-				{% endfor %}
-
-
-</table>
-<br>
-<br>
-<input type="button" id="Submit" value="Submit" onclick="getSelected()">
-</body>
-<script type="text/javascript" src="{{url_for('static', filename='asgCreationJS.js')}}"> </script>
-
+      <link href="/static/css/create_asg.css" rel="stylesheet" type="text/css">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--bootstrap-->
+      <link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src= "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <app-navbar></app-navbar>
+    <div class="menu-container">
+      <expert-menu></expert-menu>
+      <div class="other-items">
+        <section class="asg-list-items">
+          <label>Assignment name:</label>
+          <input type="text" id="asg">
+          <input type="button" id="Submit" value="Submit" onclick="getSelected()">
+        </section>
+        <section class="asg-list-items">
+          <table id="promptInfo">
+            <tr>
+              <th>Prompt Id</th>
+              <th>Description for Prompt</th>
+              <th>language</th>
+              <th>Image Name</th>
+              <th>Type of Prompt</th>
+              <th>Select</th>
+            </tr>
+            {% for i in list_prompts %}
+              <tr>
+                <td>{{ i.promptId }}</td>
+                <td>{{ i.descriptionPrompt }}</td>
+                <td>{{ i.language }}</td>
+                <td>{{ i.image }}</td>
+                <td>{{ i.type_prompt }}</td>
+                <td><input type="checkbox" id="prompt"></td>
+              </tr>
+              {% endfor %}
+            </table>
+          </section>    
+      </div>  
+    </div>
+  
+    <script src="/static/component.js"></script>
+  </body>
+  <script type="text/javascript" src="{{url_for('static', filename='asgCreationJS.js')}}"> </script>
 </html>
