@@ -30,7 +30,7 @@
     margin:auto; 
     background-color:var(--secondary-background-color);
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     padding-top: 65px;
 }
 .recording-card{
@@ -99,3 +99,37 @@
 .stop:active{
     background-color:var(--record-stop-color);
 }
+
+.sound-clips{
+    background-color:var(--secondary-background-color);
+} 
+
+.delete{
+    box-shadow: none;
+    font-size: 14px;
+    font-family: var(--text-font-family);
+    padding: 10px 15px 10px 15px;
+    background-color: #555;
+    color: white;
+    border:none;
+    border-radius:30px;
+} 
+.submit{
+    box-shadow: none;
+    font-size: 14px;
+    font-family: var(--text-font-family);
+    padding: 10px 15px 10px 15px;
+    background-color: var(--body-text-color);
+    color: white;
+    border:none;
+    border-radius:30px;
+}
+
+@media screen and (max-width: 600px) {
+    .recording-card {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  
