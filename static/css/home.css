@@ -11,14 +11,6 @@
 div{
   margin: auto;
 }
-/* #container {
-  width: 70vh;
-  border: 15px solid var(--primary-blue-color);
-  height: 290px;
-  margin-left: 42vh;
-  margin-right: 35vh;
-  margin-top: 20vh;
-} */
 .container { 
   margin-top: 20vh;
   margin-left: 30vh;
