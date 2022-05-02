@@ -2,10 +2,13 @@ import datetime
 
 from helper_functions import *
 from prompt_helper_functions import *
+from assignment_helper import *
+from media_bucket import *
 from datetime import date
+
 language=1
 expert=1
-d = date(2000,9,15)
+#d = date(2000,9,15)
 #print(d)
 #create_expert("expert1","1234","fName","lName","00000","123@asd.com")
 #create_language(name="English",prefix="eng")
@@ -23,7 +26,9 @@ d = date(2000,9,15)
 #create_image("number_seven",'./Images/seven.png')
 #create_image("blank",'./Images/blank.jpg')
 #create_image("test",'./Images/test.jpg')
-
+#create_image("descriptive",'./Images/descriptive.jpg')
+#create_image("nothing",'./Images/nothing')
+#create_image("among.png",'./Images/among.png')
 #create type_prompt() # the description can be changed later
 #create_type_of_prompt("Spontaneous","Spontaneous prompt")
 #create_type_of_prompt("Semi-spontaneous","Semi-spontaneous prompt")
@@ -48,7 +53,7 @@ d = date(2000,9,15)
 #get_list_group_id()
 
 #create assignment
-#date_asg = datetime.datetime.now()
+date_asg = datetime.datetime.now()
 #state_of_prompt =0 #0 for unfinished, 1 for finished
 #expert_asg=1
 #patient_asg=1
@@ -79,5 +84,9 @@ d = date(2000,9,15)
 #create_list_group(promptId=7,groupId=2) # semi spontaneous prompt to general list of prompts
 #create_list_group(promptId=8,groupId=2) # Non-spontaneous prompt to general list of prompts
 
-add_prompt_to_group(groupName="General",prompt=7)
-add_prompt_to_group(groupName="General",prompt=8)
+#add_prompt_to_group(groupName="General",prompt=7)
+#add_prompt_to_group(groupName="General",prompt=8)
+
+# testing asg helpers
+#list_of_prompts()
+#get_file_name()

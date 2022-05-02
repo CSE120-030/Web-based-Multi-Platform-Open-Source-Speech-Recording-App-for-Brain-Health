@@ -1,42 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Prompts</title>
+        <link href="/static/css/create_prompt.css" rel="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--bootstrap-->
+        <link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src= "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-</head>
-<body>
-<h1>Prompt creation</h1>
-<h3>Prompt Description:
-</h3>
-<textarea rows="10" cols="100" placeholder="Enter Prompt Description" id="text_description"></textarea>
-<h3>Type of Prompt: </h3>
-<select name="Type_of_Prompt" id="type_of_prompt">
-{% for item in top %}
-<option value="{{item.type_of_prompt}}">{{item.prompt_name}}</option>
-{% endfor %}
-</select>
+    </head>
+    <body>
+        <app-navbar></app-navbar>
+        <div class="prompt-box">
+            <expert-menu></expert-menu>
+            <div class="create-prompt-page">
+                <div class="prompt-card">
+                    <h2>Create Prompt</h2>
+                    <div class="prompt-header">
+                        Prompt Description:
+                        <!--<textarea rows="10" cols="100" placeholder="Enter Prompt Description" id="text_description"></textarea>-->
+                        <div class="prompt-container">
+                            <textarea name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' placeholder="Enter Prompt Description" id="text_description"></textarea>
+                        </div>  
 
-<h3>Language: </h3>
+                        Type of Prompt:
+                        <div class="prompt-container">
+                            <select name="Type_of_Prompt" id="type_of_prompt">
+                                {% for item in top %}
+                                <option value="{{item.type_of_prompt}}">{{item.prompt_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    
+                    
+                        Language: 
+                        <div class="prompt-container">
+                            <select name="Language_selection" id="type_of_language">
+                                {% for i in languages %}
+                                <option value="{{i.language_id}}">{{i.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <h4 for="image">Choose an image for prompt:</h4>
+                        <div class="prompt-container">
+                            <input type="file"
+                                id="imageSelected" name="image"
+                                accept="image/png, image/jpeg">
+                            <input type="button" class="submit-button" value="Submit" onclick="checkForm()">
+                        </div>
+                    </div> 
 
-<select name="Language_selection" id="type_of_language">
-{% for i in languages %}
-<option value="{{i.language_id}}">{{i.name}}</option>
-{% endfor %}
-</select>
-
-
-<h3 for="image">Choose a image for prompt:</h3>
-
-<input type="file"
-       id="imageSelected" name="image"
-       accept="image/png, image/jpeg">
-
-<input type="button" value="Submit" onclick="checkForm()">
-
-
-
-
-<script type="text/javascript" src="{{url_for('static', filename='createPromptJS.js')}}"> </script>
-</body>
+                </div>
+                <div class="prompt-card">
+                    <a href="/expertPortal/create_asg" style="text-decoration: none;"><h4>Assign Prompts to Patients</h4> </a>
+                </div>
+            </div>    
+        </div>    
+        
+        <script type="text/javascript" src="{{url_for('static', filename='createPromptJS.js')}}"> </script>
+        <script src="/static/component.js"></script>
+    </body>
 </html>

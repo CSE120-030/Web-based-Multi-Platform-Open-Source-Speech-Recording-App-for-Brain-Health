@@ -21,7 +21,6 @@
     margin: 100px auto;
     padding: 4px;
     color:white;
-    margin: 100px -90px; 
     position:relative;
     left:50%;
 
@@ -32,12 +31,13 @@
 
 .termsbox {
     display:block;
-    padding: 0.1em;
+    padding: 0.5em;
     margin: 1em;
-    font-size: 16px;
+    border: 3px solid #ddd;
+    background-color: #eee;
     max-width: 400px;
   }
-  
+
   input {
     height: 2em;
     width: 2em;
@@ -60,4 +60,3 @@
   }
 
 
- 
