@@ -7,6 +7,7 @@ from flask_login import UserMixin
 from myapp import app
 
 db = SQLAlchemy(app)
+
 class ListGroup(db.Model):
     __tablename__ = 'ListGroups'
     listGroupId = db.Column(db.Integer, primary_key=True)
@@ -63,6 +64,7 @@ class User(UserMixin,db.Model):
     userId = db.Column(db.Integer, primary_key= True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(50), nullable= False)
+    confirmed =db.Column(db.Boolean, nullable=True)
 
     def is_patient(self):
         return db.session.query(Patient).filter(Patient.userId == self.userId).first() is not None
@@ -86,6 +88,9 @@ class User(UserMixin,db.Model):
 
     def check_password(self,password):
         return self.password ==password
+
+    def check_confirmation(self):
+        return self.confirmed
 
 
 

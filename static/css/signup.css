@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+:root{
+    --main-background-color:#EBE7E0;
+    --primary-blue-color:#165EA0;
+    --secondary-background-color: white;
+    --text-font-family: 'Open Sans Light', sans-serif;
+    --body-text-color: #1A1B41; 
+    --border-box-shadow:#e7e7e7;
+}
+
+h2{
+    text-align: center;
+    color: var(--body-text-color);
+    font-family:var(--text-font-family);
+    font-size:30px;
+}
+h3{
+    text-align: left;
+    color: var(--body-text-color);
+    font-family:var(--text-font-family);
+    font-size:16px;
+    margin-left: 20px;
+}
+
+
+body{
+    background-color: var(--main-background-color);
+}
+
+.loginBox{
+    width: 450px;
+    height: 290px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 200px auto auto auto;
+    border-style: none;
+    border-radius:30px;
+    background-color:white;
+
+}
+
+#username{
+    width: 300px;
+    height: 30px;
+    border-style: solid;
+    border-color: #1A1B41;
+    border-radius: 5px;
+    padding-left: 8px;
+    margin-left: 70px;
+    margin-bottom: 10px;
+    font-family: vars(--text-font-family);
+}
+
+#password{
+    width: 300px;
+    height: 30px;
+    border-style: solid;
+    border-color: #1A1B41;
+    border-radius: 5px;
+    padding-left: 8px;
+    margin-left: 70px;
+    margin-bottom: 10px;
+    font-family: vars(--font-family);
+
+}
+
+#loginButton{
+    box-shadow: none;
+    font-size: 22px;
+    font-family: var(--text-font-family);
+    padding: 10px 50px 10px 50px;
+    background-color: var(--primary-blue-color);
+    color: white;
+    margin-left:32.5%;
+    border:none;
+    border-radius:30px;
+}

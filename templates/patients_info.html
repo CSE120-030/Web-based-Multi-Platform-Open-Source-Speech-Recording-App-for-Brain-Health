@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<table id="patientInfo">
+                <tr>
+                    <th>Patient ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Language</th>
+                    <th>Sex</th>
+                    <th>Date of Birth</th>
+                    <th>Assignment</th>
+                    <th>Date of Assignment</th>
+                    <th>Assign new prompts</th>
+                </tr>
+
+    {% for i in list_patient %}
+					<tr>
+                        <td class="patient_id">{{ i.patient_id }}</td>
+                        <td>{{ i.first_name }}</td>
+                        <td>{{ i.last_name }}</td>
+                        <td>{{ i.language }}</td>
+                        <td>{{ i.sex }}</td>
+                        <td>{{ i.dob }}</td>
+                        <td>{{ i.group_name }}</td>
+                        <td>{{ i.asg_date }}</td>
+                        <td class="group_name">
+                            <select name="group_selection" id="group">
+                            {% for i in get_asg %}
+                            <option value="{{i.group_id}}" >{{i.group_name}}</option>
+                            {% endfor %}
+                        </select>
+                        </td>
+                    <td><input type="button" id="Submit" value="Change" onclick="changeAsg(this)"></td>
+                </tr>
+				{% endfor %}
+
+
+</table>
+<br>
+<br>
+
+</body>
+<script type="text/javascript" src="{{url_for('static', filename='changeAsgJS.js')}}"> </script>
+
+</html>
