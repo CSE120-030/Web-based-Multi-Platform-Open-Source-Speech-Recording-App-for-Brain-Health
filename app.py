@@ -114,6 +114,30 @@ def expertPortal():
         return render_template("expertPortal.html",prompts = get_file_name_expert(), table= info_expert_portal())
 
 
+#from patientPortal
+@app.route('/patientTasks', methods=['POST', 'GET'])
+@login_required
+def patientTasks():
+    if request.method == "GET":
+        return render_template("patientTasks.html",your_assignments =get_assignments())
+
+    if request.method == "POST":
+        print("in post function")
+        print(request.json)
+        list_returned = asg_to_do(request.json);
+        print("right after asg to do was called")
+        print(list_returned)
+        print("list_length:",list_length)
+        for item in list_returned:
+            new_dict = copy.deepcopy(item)
+            prompt_list.append(new_dict)
+        print("after for loop")
+        print("printing prompt list")
+        print(prompt_list)
+        #return render_template("patientPortal.html")#get_asg_name=asg_to_do(request.json))
+        return render_template("prompt.html")#redirect(url_for("do_prompts",prompt_id=0))
+
+
 @app.route('/patientPortal/', methods=['POST', 'GET'])
 @login_required
 def patientPortal():
@@ -198,8 +222,6 @@ def get_image():
         print(image_name)
         return image_name
 
-
-
 @app.route('/media', methods=['POST', 'GET'])
 def media():
     if request.method=="GET":
@@ -221,6 +243,53 @@ def createPrompt():
         print(request.json)
         return render_template("create_prompt.html", promptCreation=prompt_creation(request.json))
 
+@app.route('/promptList/', methods=['POST', 'GET'])
+@login_required
+def promptList():
+    if request.method=="GET":
+        return render_template("promptList.html", prompts = get_file_name_expert(), table= info_expert_portal())
+    
+@app.route('/expertPortal/download_prompt/<prompt_name>/', methods=['GET','POST'])
+@login_required
+def get_prompt(prompt_name):
+    global prompt_counter_aws
+    if request.method=='GET':
+        print(prompt_name)
+        if prompt_name=="Spontaneous":
+
+            prompt_counter_aws=0
+            print(prompt_counter_aws)
+            name_file_dowload = get_file_name_expert()
+            print("audio to download:" + name_file_dowload[int(prompt_counter_aws)])
+            print(name_file_dowload[int(prompt_counter_aws)])
+            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file,code=302)
+
+        elif prompt_name=="Semi-spontaneous":
+
+            prompt_counter_aws=1
+            print(prompt_counter_aws)
+            name_file_dowload = get_file_name_expert()
+            print("audio to download:"+name_file_dowload[int(prompt_counter_aws)])
+            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file,code=302)
+
+        elif prompt_name=="Non-spontaneous":
+
+            prompt_counter_aws=2
+            print(prompt_counter_aws)
+            name_file_dowload = get_file_name_expert()
+            print(name_file_dowload[int(prompt_counter_aws)])
+            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file,code=302)
+
+        elif prompt_name== "Another_type_of_prompt":
+            prompt_counter_aws=3
+            print(prompt_counter_aws)
+            name_file_dowload = get_file_name_expert()
+            print(name_file_dowload[int(prompt_counter_aws)])
+            file=aws_download(name_file_dowload[int(prompt_counter_aws)])
+            return redirect(file,code=302)
 
 
 @app.route('/expertPortal/download_prompt/<prompt_name>/<language>/<prompt_id>/<first_name>/<last_name>/<patient_id>', methods=['GET','POST'])
