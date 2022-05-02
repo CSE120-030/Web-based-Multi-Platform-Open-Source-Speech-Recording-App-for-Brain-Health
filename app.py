@@ -70,8 +70,7 @@ def load():
             return redirect(url_for("expertPortal",expert_name=current_user.get_name()))
 
     return render_template("signUp.html")
-
-
+  
 @app.route('/',methods = ['GET'])
 def welcome():
     return render_template('homePage.html')

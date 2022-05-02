@@ -56,13 +56,5 @@ button {
 button:hover{
   background-color: #165EA0;
 } 
-/* 
-.top-radius{
-  border-top-right-radius: 30px;
-  border-top-left-radius: 30px;
-}
 
-.bottom-radius{
-  border-bottom-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-} */
+

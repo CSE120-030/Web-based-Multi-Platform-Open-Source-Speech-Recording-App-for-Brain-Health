@@ -1,3 +1,10 @@
+:root{
+  --main-background-color:#EBE7E0;
+  --primary-blue-color:#165EA0;
+  --text-font-family: 'Open Sans Light', sans-serif;
+  --body-text-color: #1A1B41;
+}
+
 .hclass {
     padding: 5%;
     text-align: center;
@@ -14,7 +21,6 @@
     margin: 100px auto;
     padding: 4px;
     color:white;
-    margin: 100px -90px;
     position:relative;
     left:50%;
 
@@ -39,6 +45,18 @@
   }
 
   .boxed {
-    border: 1px solid green ;
-
+    border: 1px solid black ;
+    width: 1070px;
+    height: 300px;
+    overflow: scroll;
   }
+
+  #accept:hover{
+    box-shadow: 0 4px 0 0 #7ED37E;
+  }
+
+  .decline:hover{
+    box-shadow: 0 4px 0 0 #7ED37E;
+  }
+
+

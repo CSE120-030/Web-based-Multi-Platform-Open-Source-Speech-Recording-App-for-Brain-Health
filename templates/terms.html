@@ -1,36 +1,86 @@
+<!-- <<<<<<< Betsy
  <!DOCTYPE html>
     <Html>
     
      <header class="hclass">
         <link rel="stylesheet" type="text/css" href="../static/css/terms.css">
+======= -->
+
+    <!DOCTYPE html>
+    <html>
+    
+     <header class="hclass">
+        <link rel="stylesheet" href="./terms.css">
+        <script src="./terms.js"></script>
         <h1>Terms and Conditions</h1>
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+   
+    
+    <!--auto translate-->
+      <div id = "google_element" style = "position:absolute; left:100px; top:50px;"  ></div>
+      <script src="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+      <script>
+        function loadGoogleTranslate(){
+          new google.translate.TranslateElement("google_element");
+        }
+      </script>
     
     
-        <div class="boxed">
+    
+    
+    
+    
+    
+        
+        <div class="boxed" style = "position:absolute; left:200px; top:200px;">
         Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using mobile application (the "Service") operated by UCSF ("us", "we", or "our").
     Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.
     By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service. 
-    
+    Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using mobile application (the "Service") operated by UCSF ("us", "we", or "our").
+    Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.
+    By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service. 
+    Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using mobile application (the "Service") operated by UCSF ("us", "we", or "our").
+    Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.
+    By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service. 
+    Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using mobile application (the "Service") operated by UCSF ("us", "we", or "our").
+    Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.
+    By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service. 
     
     <br></br>
     <br></br>
-    (This is just sample text)
+    
     </div>
     
+    <div class="termsbox" style = "position:absolute; left:200px; top:500px;">
+          <!-- disable until box checked-->
+        <input id="checkbox" type="checkbox"  onchange="document.getElementById('button').disabled = !this.checked;" />
+        <label for="check"> I agree to these Terms and Conditions</label>
+        </div>
     
+        <br>
     
-    <div class="termsbox">
-        <input id="terms" type="checkbox" onclick="check_checkbox()">
-        <label for="checkbox" > I agree to these <a href="#">Terms and Conditions</a></label>
-    </div>
+        <div class="buttonWrap"  style = "position:fixed; left:625px; top:650px;">
+        <div id="blocker"></div>
+        <!--add disabled-->
+        <a href="/"><button   id = "button" className="accept" disabled 
+            style = "width:70px;height:30px;font-size: 16px;"  >Accept</button>  </a>
+    
+        <a href="/"><button  id="declines" className="decline"
+            style = "width:70px;height:30px;font-size: 16px;">Decline</button></a>
+        </div>
     
     
         </header>
         
+<!-- <<<<<<< Betsy
         <a href="{{url_for('load')}}"><button className="homeButtonEnter" id="enter">Enter</button></a>
 
         
         <script type="text/javascript" src="{{url_for('static', filename='termsJS.js')}}"> </script>
     </Html>
     
+=======
+         -->
+        
+        
+    </html>
