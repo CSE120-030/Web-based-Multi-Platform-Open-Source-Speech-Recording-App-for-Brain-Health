@@ -41,7 +41,7 @@ p{
   margin-top: 3vh;
   margin-bottom: 3vh;
 }
-/* .homeButtonEnter{
+.homeButtonEnter{
     height: 60px;
     width: 150px;
     background-color: black;
@@ -54,14 +54,13 @@ p{
     position:relative;
     left:50%;
 
-} */
-/* .homeButtonEnter:hover {
-    background: #165EA0;
-} */
-.buttonWrap{
-  margin: auto;
-  padding-bottom: 5vh;
 }
+.homeButtonEnter:hover {
+    background: #165EA0;
+}
+
+
+
   input {
     height: 2em;
     width: 2em;
