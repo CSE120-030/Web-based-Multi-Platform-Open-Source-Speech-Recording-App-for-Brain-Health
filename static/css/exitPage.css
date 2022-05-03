@@ -3,21 +3,29 @@
 :root{
     --main-background-color:#EBE7E0;
     --primary-blue-color:#165EA0;
+    --secondary-background-color: white;
     --text-font-family: 'Open Sans Light', sans-serif;
-    --body-text-color: #1A1B41;
+    --body-text-color: #1A1B41; 
+    --border-box-shadow:#e7e7e7;
+    --menu-text: #cccccb;
 }
 body{
-    background-color: var(--main-background-color);
+    background-color: var(--secondary-background-color);
 }
 div{
-
-    /* padding-right: 5vh; */
+    margin: auto;
+  }
+.boxcontainer{
+    margin-top: 20vh;
+    margin-left: 30vh;
+    margin-right: 30vh;
+    display: grid;  
+    grid-template-columns: auto;  
+    grid-template-rows: auto auto;  
     background-color:var(--primary-blue-color);
-    width: 80vh;
     border: 10px solid black;
-    margin-left: 22%;
-    margin-top: 19%;
-    height: 40vh;
+    padding-bottom: 5vh;
+
 
 }
 h1{
@@ -32,3 +40,18 @@ h1{
     line-height: 9vh;
 
 }
+button {
+    font-family: var(--text-font-family);
+    color: var(--secondary-background-color);
+    background-color: black;
+    height: 60px;
+    width: 200px;
+    box-shadow: none;
+    border-radius: 15px;
+    font-size: 40px;
+    text-align: center;
+  }
+  
+  button:hover {
+    background-color: var(--body-text-color);;
+  }
