@@ -1,60 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
-:root{
-    --main-background-color:#EBE7E0;
-    --primary-blue-color:#165EA0;
-    --secondary-background-color: white;
-    --text-font-family: 'Open Sans Light', sans-serif;
-    --body-text-color: #1A1B41; 
-    --border-box-shadow:#e7e7e7;
+:root {
+  --main-background-color: #EBE7E0;
+  --primary-blue-color: #165EA0;
+  --secondary-background-color: white;
+  --text-font-family: 'Open Sans Light', sans-serif;
+  --body-text-color: #1A1B41;
+  --border-box-shadow: #e7e7e7;
+}
+div{
+  margin: auto;
+}
+.container { 
+  margin-top: 20vh;
+  margin-left: 30vh;
+  margin-right: 30vh;
+  display: grid;  
+  grid-template-columns: auto;  
+  grid-template-rows: auto  auto  auto;  
+  border: 15px solid var(--primary-blue-color);
+  padding-bottom: 5vh;
 }
 
-.center-page{
-  text-align:center;
-  background-color:var(--primary-blue-color);
-  width: 450px;
-  height: 290px;
-  justify-content: center;
-  align-items: center;
-  margin: 200px auto auto auto;
-  padding:15px;
-  border-style: none;
-  border-radius:30px;
+h1 {
+  font-family: var(--text-font-family);
+  color: var(--body-text-color);
+  text-align: center;
+  padding-top: 5vh;
+  font-size: 5vh;
 }
 
-.center-items{
-  text-align:center;
-  background-color:var(--secondary-background-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-style: none;
-  padding:7px;
-}
-h1{
-  font-family: var(--text-font-family);
-  color:var(--body-text-color);
-  text-align: center;
-}
-h3{
+h3 {
   text-align: center;
   font-family: var(--text-font-family);
-  color:var(--body-text-color);
+  color: var(--body-text-color);
+  padding-bottom: 5vh;
+
 }
+
 button {
   font-family: var(--text-font-family);
-  color:var(--secondary-background-color);
+  color: var(--secondary-background-color);
   background-color: var(--body-text-color);
   height: 60px;
   width: 200px;
   box-shadow: none;
-  border-radius:15px;
+  border-radius: 15px;
   font-size: 40px;
-  text-align:center; 
-  padding: 10px 15px 10px 15px;
+  text-align: center;
 }
-button:hover{
+
+button:hover {
   background-color: #165EA0;
-} 
-
-
+}
