@@ -311,6 +311,12 @@ def list_patients():
         print(request.json)
         return render_template('patients_info.html',new_asg=change_asg_to_patient(request.json))
 
+@app.route('/promptList/', methods=['POST', 'GET'])
+@login_required
+def promptList():
+    if request.method=="GET":
+        return render_template("promptList.html", prompts = get_file_name_expert(), table= info_expert_portal())
+
 @app.after_request
 def after_request(response):
   response.headers.add('Access-Control-Allow-Origin', '*')

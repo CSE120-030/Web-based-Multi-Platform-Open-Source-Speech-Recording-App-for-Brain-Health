@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Patient Recordings</title>
+        <link href="../static/css/promptList.css" rel="stylesheet" type="text/css">
+        <link href="../static/css/expertPortal.css" rel="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--bootstrap-->
+        <link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src= "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+        <app-navbar></app-navbar>
+        <div class="menu-container">
+            <expert-menu></expert-menu>
+            <!--<h1>Expert Portal</h1> -->
+            <div class="other-items">
+                <section class="prompt-list-items">
+                    <h3>Manage Patients</h3>
+                    <a href="{{ url_for('registration') }}" style="text-decoration:none;">Register a new patient</a><br><br>
+                </section>
+                <section class="prompt-list-items">
+                    <h3>Manage Patient Recordings</h3>
+                    <div id="yourCourses" class="tabcontent">
+                        <table>
+                            <tr>
+                                <th>Type of Prompt</th>
+                                <th>Language</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Patient Id</th>
+                                <th>Prompt Id</th>
+                                <th>Download</th>
+                            </tr>
+
+                            {% for i in table %}
+                            <tr>
+                                <td class="group_name">{{ i.type_of_prompt}}</td>
+                                <td >{{ i.language}}</td>
+                                <td >{{ i.first_name }}</td>
+                                <td >{{ i.last_name }}</td>
+                                <td >{{ i.patient_id }}</td>
+                                <td >{{ i.prompt_id }}</td>
+                                <td>
+                                    <button class="download_prompt" onclick="download(this)"><a href="{{url_for('get_prompt2',prompt_name=i.type_of_prompt,language = i.language,prompt_id= i.prompt_id, first_name=i.first_name,last_name=i.last_name,patient_id=i.patient_id)}}" style="color: white; text-decoration:none;">Download</a></button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <script src="../static/component.js"></script>
+    </body>
+</html>

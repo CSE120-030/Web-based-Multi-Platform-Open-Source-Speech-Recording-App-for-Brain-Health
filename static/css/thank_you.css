@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+:root{
+    --main-background-color:#EBE7E0;
+    --primary-blue-color:#165EA0;
+    --secondary-background-color: white;
+    --text-font-family: 'Open Sans Light', sans-serif;
+    --body-text-color: #1A1B41;
+    --border-box-shadow:#e7e7e7;
+}
+h1{
+    font-family:var(--text-font-family);
+    color: var(--body-text-color);
+    text-align: center;
+}
+.logout-btn{
+    box-shadow: none;
+    font-size: 14px;
+    font-family: var(--text-font-family);
+    padding: 10px 15px 10px 15px;
+    background-color: var(--body-text-color);
+    color: white;
+    border:none;
+    border-radius:30px;
+}
+.contain-elements{
+    text-align:center;
+    margin: 70px;
+}

@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Expert Portal</title>
+
+
+
+    <meta charset="UTF-8">
+        <title>Expert Portal</title>
+        <link href="../static/css/expertPortal.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/promptList.css" rel="stylesheet" type="text/css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--bootstrap-->
+        <link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src= "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1>Expert Portal</h1>
+ <app-navbar></app-navbar>
+        <div class="menu-container">
+            <expert-menu></expert-menu>
 <aside><h3>Create Prompt</h3>
     <a href="{{ url_for('createPrompt') }}">Create Prompt</a><br><br>
     <a href="{{ url_for('registration') }}">Register a new patient</a><br><br>
     <a href="{{ url_for('create_asg') }}">Create a new assignemnt</a><br><br>
-    <a href="{{ url_for('list_patients') }}">See all patients</a><br><br>
+    <a href="{{ url_for('list_patients') }}">See all patients and change prompts</a><br><br>
 
 
     <div id="yourCourses" class="tabcontent">
@@ -47,5 +63,13 @@
 
 
 </aside>
+
+         <div class="other-items">
+                <h3>Welcome to the Admin Portal</h3>
+            </div>
+        </div>
+
+
+ <script src="../static/component.js"></script>
 </body>
 </html>
