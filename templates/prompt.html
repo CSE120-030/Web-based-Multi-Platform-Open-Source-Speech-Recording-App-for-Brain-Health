@@ -90,7 +90,7 @@
              type: "GET",
              success: function(response) {
                  console.log(response)
-                  if(response=="nothing")
+                  if((response=="nothing") || response=="blank.jpg")
                   {
                       $("#myimg").remove();
                   }
