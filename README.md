@@ -76,20 +76,25 @@ The team utilized the following technologies:
 ```
 
 ### Testing
-**Internal Test**
+<ol>
+	<li>Internal Test
 {insert database queries or invisible tings} 
 Use Postman to verify successful routing for all pages:
-
-**Unit Test** 
+	</li>
+	
+	<li>Unit Test
 {considers visible features}
 Responsiveness:
-
-**Application Test**
+	</li>
+	
+	<li>Application Test
 {verifies scenarios to catch potential bugs}
-
-
-**Stress Test**  
+	</li>
+	
+	<li>Stress Test
 {how the app performs on limited resources}
+	</li>
+</ol>
 
 
 #### Challenges faced and hope for the future: 
