@@ -154,4 +154,4 @@ class PatientMenu extends HTMLElement{
 
 customElements.define("app-navbar", Navbar);
 customElements.define("expert-menu", ExpertMenu);
-customElements.define("patient", PatientMenu);
+customElements.define("patient-menu", PatientMenu);
