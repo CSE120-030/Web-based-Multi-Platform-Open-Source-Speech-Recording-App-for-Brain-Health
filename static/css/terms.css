@@ -54,7 +54,7 @@ p {
   padding-bottom: 5vh;
 }
 
-#acceptButton {
+#enter {
   border: 3px solid var(--primary-blue-color);
   width: auto;
   height: 40px;
@@ -74,7 +74,7 @@ input {
   vertical-align: middle;
 }
 
-#acceptButton:hover {
+#enter:hover {
   background: #165EA0;
   color: white;
 }
