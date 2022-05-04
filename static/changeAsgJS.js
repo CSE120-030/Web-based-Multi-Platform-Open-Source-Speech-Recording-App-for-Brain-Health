@@ -24,7 +24,12 @@ function changeAsg(element)
 
     xhttp.send(JSON.stringify({"patient_id":patient_id,"group_id":new_group}));
 
+    clear();
 
 
+}
 
+function clear()
+{
+    alert("Changes done")
 }

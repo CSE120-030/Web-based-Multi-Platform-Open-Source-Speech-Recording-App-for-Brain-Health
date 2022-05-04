@@ -311,6 +311,29 @@ def list_patients():
         print(request.json)
         return render_template('patients_info.html',new_asg=change_asg_to_patient(request.json))
 
+#from patientPortal
+@app.route('/patientTasks/', methods=['POST', 'GET'])
+@login_required
+def patientTasks():
+    if request.method == "GET":
+        return render_template("patientTasks.html",your_assignments =get_assignments())
+
+    if request.method == "POST":
+        print("in post function")
+        print(request.json)
+        list_returned = asg_to_do(request.json);
+        print("right after asg to do was called")
+        print(list_returned)
+        print("list_length:",list_length)
+        for item in list_returned:
+            new_dict = copy.deepcopy(item)
+            prompt_list.append(new_dict)
+        print("after for loop")
+        print("printing prompt list")
+        print(prompt_list)
+        #return render_template("patientPortal.html")#get_asg_name=asg_to_do(request.json))
+        return render_template("prompt.html")#redirect(url_for("do_prompts",prompt_id=0))
+
 @app.route('/promptList/', methods=['POST', 'GET'])
 @login_required
 def promptList():

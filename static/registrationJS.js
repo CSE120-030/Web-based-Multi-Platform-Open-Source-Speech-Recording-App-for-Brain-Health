@@ -26,9 +26,25 @@ function sendData()
     }
     xhttp.send(JSON.stringify({"first_name": fist_name, "last_name":last_name,"language":type_of_language,
     "email":email, "user_name":username,"password":password,"dob":dob,"sex":sex}));
+        alert("Data submitted");
+        clear();
 
 
 
 
 
+}
+function clear()
+{
+     document.getElementById("first_name").value="";
+      document.getElementById("last_name").value="";
+      document.getElementById("e").value="";
+     document.getElementById("user_name").value="";
+     document.getElementById("password").value="";
+    document.getElementById("dob").value ="";
+    //fist_name="";
+    //last_name="";
+    //username="";
+    //password="";
+    //dob="";
 }
