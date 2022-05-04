@@ -5,7 +5,8 @@
 ##### Table of Contents  
 [Project Description](#About)
 [Requirements](#requirements)  
-[Running the Project](#run)  
+[Running the Project](#run)
+[Troubleshooting](#troubleshooting)
 ...  
 <a name="Project-description"/>
 <a name="requirements"/>
@@ -75,12 +76,23 @@ The team utilized the following technologies:
 ```
 
 ### Testing
-- postman
-- responsiveness
-- 
+**Internal Test**
+{insert database queries or invisible tings} 
+Use Postman to verify successful routing for all pages:
+
+**Unit Test** 
+{considers visible features}
+Responsiveness:
+
+**Application Test**
+{verifies scenarios to catch potential bugs}
 
 
-#### Challenges faced and hope for the future
+**Stress Test**  
+{how the app performs on limited resources}
+
+
+#### Challenges faced and hope for the future: 
 
 
 ### Requirements
@@ -97,11 +109,20 @@ The team utilized the following technologies:
 	
 	```
 
-create python virtual environment
 
 ### Run 
 - After installing your favorite IDE and python packages, the following commands are used to run the flask app project
-- app.py is the driver file that runs the flask app project
+- app.py is the driver file that runs the flask app project which is found in the main project directory
+
 	```python
 	python3 app.py
-	```
+	``` 
+
+### Troubleshooting
+- if experiencing issues, remove the existing venv folder and create a new python virtual environment in the main directory:
+
+```shell
+pip install virtualenv # for bash/zsh users
+source venv/bin/activate
+pip install flask #continue to installl required packages this way
+```
