@@ -63,7 +63,7 @@ function getSelected() {
 
 
         }
-
+        alert("Data submitted");
 
     }
 }
