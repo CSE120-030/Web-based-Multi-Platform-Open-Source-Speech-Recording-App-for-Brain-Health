@@ -4,7 +4,8 @@
         <meta charset="UTF-8">
         <title>Patient Recordings</title>
         <link href="../static/css/promptList.css" rel="stylesheet" type="text/css">
-        <link href="../static/css/expertPortal.css" rel="stylesheet" type="text/css">
+        <link href="../static/css/expertPortal.css" rel="stylesheet" type="text/css"> 
+        
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--bootstrap-->
         <link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -22,6 +23,10 @@
                 <section class="prompt-list-items">
                     <h3>Manage Patients</h3>
                     <a href="{{ url_for('registration') }}" style="text-decoration:none;">Register a new patient</a><br><br>
+                </section>
+                <section>
+                    <h3> Change prompt groups for Patients</h3>
+                    <a href="{{ url_for('list_patients') }}" style="text-decoration:none;">Change prompt groups for Patients</a><br><br>
                 </section>
                 <section class="prompt-list-items">
                     <h3>Manage Patient Recordings</h3>
