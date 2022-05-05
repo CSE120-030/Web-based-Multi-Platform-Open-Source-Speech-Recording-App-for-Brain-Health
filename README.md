@@ -3,10 +3,10 @@
 
 
 ##### Table of Contents  
-[Project Description](#About)
-[Requirements](#requirements)  
-[Running the Project](#run)
-[Troubleshooting](#troubleshooting)
+[Project Description](#About)   <br>
+[Requirements](#requirements)   <br>
+[Running the Project](#run)	<br>
+[Troubleshooting](#troubleshooting) <br>
 ...  
 <a name="Project-description"/>
 <a name="requirements"/>
