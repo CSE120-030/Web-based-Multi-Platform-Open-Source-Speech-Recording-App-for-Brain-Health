@@ -101,7 +101,8 @@ Responsiveness:
 
 
 ### Requirements
-- python packages required to run the project:
+1. Python 3+ is required to run on this project 
+2. python packages required to run the project:
 
 	```python
 	flask
@@ -112,6 +113,19 @@ Responsiveness:
 	SQLAlchemy
 	boto3
 	
+	```
+
+3. Install AWS CLI:
+	-  https://aws.amazon.com/cli/ for Win/Mac/Linux OS
+	-  Go back to your terminal and type the following command:
+	```Shell
+	$aws configure 
+	#access and secretkeys will be given
+	AWS Access Key ID [None]: accesskey
+	AWS Secret Access Key [None]: secretkey
+	#you choose to leave the last two answers empty by pressing "enter"
+	Default region name [None]: 
+	Default output format [None]:
 	```
 
 
