@@ -101,8 +101,9 @@ Responsiveness:
 
 
 ### Requirements
-1. Python 3+ is required to run on this project 
-2. python packages required to run the project:
+1. Python 3+ is required to run on this project:
+	- https://www.python.org/downloads/  
+3. python packages required to run the project:
 
 	```python
 	flask
