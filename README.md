@@ -116,7 +116,7 @@ Responsiveness:
 	```
 
 3. Install AWS CLI:
-	-  https://aws.amazon.com/cli/ for Win/Mac/Linux OS
+	-  https://aws.amazon.com/cli/ and download the installer for your Win/Mac/Linux OS machine
 	-  Go back to your terminal and type the following command:
 	```Shell
 	$aws configure 
