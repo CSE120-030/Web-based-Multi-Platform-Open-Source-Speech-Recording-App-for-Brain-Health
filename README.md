@@ -1,26 +1,30 @@
-# Speech-Recording-Web-App
-## 2022-01-Spring-CSE-Team330 
+# Web-based, Multi-Platform, Open-Source, Speech Recording App for Brain Health
 
+- CSE120 Spring 2022 | Team 330 
+    - Members: 
+        - Benita Onyenacho, Betsy Avila Aguilar, Jocelyn Chan, Jose Arias Zuniga, Diego Ponce
 
-##### Table of Contents  
-[Project Description](#About)
-[Requirements](#requirements)  
-[Running the Project](#run)
-[Troubleshooting](#troubleshooting)
-...  
-<a name="Project-description"/>
-<a name="requirements"/>
-<a name="run"/>
+---
+Table of Contents
+[ToC]
+## Important Links
 
-### About 
-<p> Neurodegenerative diseases affect about 50 million people worldwide (NIH). Doctors use speech and language assessments to help predict and diagnose these diseases in patients. However, these assessments tend to only come from English speakers and are very specialist-dependent. In collaboration with the UCSF Memory and Aging Center, (insert team name) developed a web based, multi-language, speech-recording application solution that displays text and picture prompts and records patients responses. With this web application, UCSF and the UdeSA Cognitive Neuroscience Center (Argentina) will analyze the data as a way to find early signs of these neurodegenerative diseases </p>
+| Features          | Tutorials               |
+| ----------------- |:----------------------- |
+| Github Repository | [:link:][GitHub-repo]   |
+| Demo Video        | [:link:][Share-Demo]    |
 
-#### What it does  
-<p>
-Our goal was to create a proof-of-concept web application with basic functionality. 
-</p>
+[GitHub-repo]: https://github.com/CSE120-030/Web-based-Multi-Platform-Open-Source-Speech-Recording-App-for-Brain-Health 
+[Share-Demo]: https://ucmerced.box.com/s/ki7ac0cw73bm4d5uafo45zfdsbqmmq5l
 
-#### Technologies implemented and their uses
+## :brain: Project Description
+<p> Neurodegenerative diseases affect about 50 million people worldwide (NIH). Doctors use speech and language assessments to help predict and diagnose these diseases in patients.  
+
+However, these assessments tend to only come from English speakers and are very specialist-dependent. In collaboration with the UCSF Memory and Aging Center, Team-330 developed a web based, multi-language, speech-recording application solution that displays text and picture prompts and records patients responses. 
+
+With this web application, UCSF and the UdeSA Cognitive Neuroscience Center will analyze the data as a way to find early signs of these neurodegenerative diseases </p>
+
+### Technologies Used
 <p>
 The team utilized the following technologies:
 	<ul>
@@ -46,7 +50,7 @@ The team utilized the following technologies:
 		<li>
 			AWS S3 Buckets 
 			<p>
-				An S3 bucket is a container that will serve to hold a NoSQL database, perfect for holding the .wav recording files
+				An S3 bucket is a container that will serve to hold a NoSQL database, perfect for holding the .wav recording files and categorizing different language buckets
 			</p>
 		</li>
 		<li>
@@ -56,12 +60,11 @@ The team utilized the following technologies:
 			</p>
 		</li>
 	</ul>
-</p> 
+</p>
 
-#### Basic File Structure:
-
+### Basic File Structure
 ```
- Speech-Recording-Web-App/
+ Web-based, Multi-Platform, Open-Source, Speech Recording App for Brain Health/
 ├─ venv/
 ├─ templates/
 ├─ Audios/
@@ -74,60 +77,74 @@ The team utilized the following technologies:
 ├─ database.py
 ├─ README.md
 ```
+---
 
-### Testing
-<ol>
-	<li>Internal Test
-{insert database queries or invisible tings} 
-Use Postman to verify successful routing for all pages:
-	</li>
-	
-	<li>Unit Test
-{considers visible features}
-Responsiveness:
-	</li>
-	
-	<li>Application Test
-{verifies scenarios to catch potential bugs}
-	</li>
-	
-	<li>Stress Test
-{how the app performs on limited resources}
-	</li>
-</ol>
+## :computer: Getting Started
 
 
-#### Challenges faced and hope for the future: 
+### 1: Clone the Github Repository on your device
+![](https://i.imgur.com/sdfzbnc.png)
 
 
-### Requirements
-- python packages required to run the project:
+To clone the repository you may use Github Desktop App or your favorite shell using the following command:
+```shell
+	git clone {copy and paste ssh link here}
+``` 
 
-	```python
+### 2: Install Dependencies
+0. Install your favorite IDE, ours is [PyCharm ](https://www.jetbrains.com/pycharm/) or [VSCode](https://code.visualstudio.com/) 
+2. Install [Python 3.0+](https://www.python.org/downloads/ )
+    - ensure pip is up-to-date:
+        ```
+        $ python -m pip install --upgrade pip #linux/mac
+        C:> py -m pip install --upgrade pip #windows
+        ```
+4. Install Python Packages
+```python
 	flask
 	flask-login
 	flask-mail
 	flask-requests
 	flask-paginate
 	SQLAlchemy
-	boto3
+	boto3	
+``` 
+3. Install AWS CLI:
+	- [Download](https://aws.amazon.com/cli/) the AWS CLI installer for your Win/Mac/Linux OS machine
+	-  Go back to the terminal and type the following command:
+	```Shell
+	$aws configure 
+	#access and secretkeys will be given
+	AWS Access Key ID [None]: accesskey
+	AWS Secret Access Key [None]: secretkey
 	
+    #you can choose to leave the last two answers empty by pressing "enter"
+	Default region name [None]: 
+	Default output format [None]:
 	```
+    
+### 3: Running the project
+While in the main project directory, the flask-app project can easily be ran with the following command:
+```python 
+    python3 app.py 
+```
+Depending on browser settings the project can be viewed at: 
+    ``` http://localhost:5000 ```
+    
+The home page should look like this:     
+![](https://i.imgur.com/JcVLaMi.png)
 
+---
 
-### Run 
-- After installing your favorite IDE and python packages, the following commands are used to run the flask app project
-- app.py is the driver file that runs the flask app project which is found in the main project directory
-
-	```python
-	python3 app.py
-	``` 
+## :gear: Troubleshooting
 
 ### Troubleshooting
-- if experiencing issues, remove the existing venv folder and create a new python virtual environment in the main directory:
+- if experiencing issues running modules, remove the existing venv folder and create a new python virtual environment in the main directory:
 
 ```shell
 pip install virtualenv # for bash/zsh users
 source venv/bin/activate
-pip install flask #continue to installl required packages this way
-```
+pip install flask #continue to install required packages this way
+``` 
+- another issue maybe selecting the appropriate python interpreter in your IDE 
+
