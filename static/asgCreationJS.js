@@ -21,16 +21,14 @@ function getSelected() {
         }
         console.log(message);
         const data_sent = message.slice(0, -1) //
+        console.log(data_sent);
         console.log(data_sent.length);
         l = Array.from(data_sent);
         console.log(l);
         //Display selected Row data in Alert Box.
         //alert(data_sent);
 
-        if (  (data_sent.length > 7))  {
-            if(data_sent.length == 8)
-            {
-                   const xhttp = new XMLHttpRequest();
+         const xhttp = new XMLHttpRequest();
             const method = "POST";
             const async = true;
             const url = window.location.href;
@@ -39,31 +37,11 @@ function getSelected() {
             xhttp.onload = function () {
 
             }
-            var prompts = data_sent.split(",")
+            var prompts = data_sent.split(",");
+            console.log(prompts);
             xhttp.send(JSON.stringify({"asg_name": asg_name, "prompts": prompts}));
+            alert("Data sent")
 
-            }
-            else {
-                alert("You can only select 4 prompts");
-            }
-        } else {
-            //get data to send to the server
-
-            const xhttp = new XMLHttpRequest();
-            const method = "POST";
-            const async = true;
-            const url = window.location.href;
-            xhttp.open(method, url, async);
-            xhttp.setRequestHeader("Content-Type", "application/json");
-            xhttp.onload = function () {
-
-            }
-            var prompts = data_sent.split(",")
-            xhttp.send(JSON.stringify({"asg_name": asg_name, "prompts": prompts}));
-
-
-        }
-        alert("Data submitted");
 
     }
 }
